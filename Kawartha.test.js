@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('test', async ({ page }) => {
 test.setTimeout(280000);
 // welcome
-  await page.goto('https://Kawartha.sites.qa.thirdstream.ca/deposits/en/app/flow/welcome');
+  await page.goto('https://sunshine.sites.qa.thirdstream.ca/deposits/en/app/flow/welcome');
   await page.getByRole('button', { name: 'Get Started' }).click();
   await page.locator('app-checkbox-input').filter({ hasText: 'I agree with the declarations' }).locator('div').nth(3).click();
   await page.locator('app-checkbox-input').filter({ hasText: 'I confirm that I have read' }).locator('div').nth(3).click();
