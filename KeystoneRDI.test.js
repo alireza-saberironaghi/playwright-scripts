@@ -200,15 +200,14 @@ test('Keystone_RDI', async ({ page }) => {
     // 📧 Email and Cell
     const mainUserEmail = 'alex.saberi@thirdstream.ca';
     const mainUserCell = '6478543392';
-    const jointUserEmail = 'alex.saberi1@thirdstream.ca';
-    const jointUserCell = '6478543394';
+    const PowerUserEmail = 'alex.saberi1@thirdstream.ca';
+    const PowerUserCell = '6478543394';
 
 
     // ⚙️ Select Options
     // Let's Get Started Page
     const selectThirdpartysOptions = Data.letsGetStartedPage.thirdPartyOptions[0]; // 0 = Yes, on behalf of a business, 1 = Yes, on behalf of an individual, 2 = No]
     const selectPowerOfAttorneyOptions = Data.letsGetStartedPage.powerOfAttorneyOptions[0]; // 0 = Yes, 1 = No
-    const selectResidentOfCanadaOptions = Data.letsGetStartedPage.residentOfCanadaOptions[0]; // 0 = Yes, 1 = No
     const selectApplyoverdraft = Data.letsGetStartedPage.applyOverdraft[0]; // 0 = Yes, 1 = No
 
 
@@ -248,7 +247,7 @@ test('Keystone_RDI', async ({ page }) => {
 
 
 
-
+    const selectResidentOfCanadaOptions = Data.letsGetStartedPage.residentOfCanadaOptions[0]; // 0 = Yes, 1 = No
     // Account Selection Page
     const selectIntendedUseOption = Data.accountSelectionPage.intendedUseOptions[1]; // ['Household Income/Expenses', 'Income - Other', 'Income - Payroll & Pension', 'Income - Other', 'Savings - Education', 'Savings - Home Improvement', 'Savings - Home/Asset purchase']
     const selectChequesOption = Data.accountSelectionPage.chequesOptions[0]; // ['Yes', 'No']
@@ -541,8 +540,8 @@ test('Keystone_RDI', async ({ page }) => {
             await page.getByText(power.dob.year, { exact: true }).first().click();
             await page.getByText(power.dob.month, { exact: true }).first().click();
             await page.getByText(power.dob.day, { exact: true }).first().click();
-            await page.getByLabel('Email').first().fill(jointUserEmail);
-            await page.getByRole('textbox', { name: 'Cell #' }).type(jointUserCell);
+            await page.getByLabel('Email').first().fill(PowerUserEmail);
+            await page.getByRole('textbox', { name: 'Cell #' }).type(PowerUserCell);
 
 
             // ---- address details
