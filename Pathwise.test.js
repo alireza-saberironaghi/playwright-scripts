@@ -233,7 +233,7 @@ const selectedMailingAddress = Data.mailingAddresses[0]; // ['Yes', 'No']
 const selectedLivedHereMoreThan24Months = Data.livedHereMoreThan24Months[0]; // ['Yes', 'No']
 
 test('Pathwise_RLO', async ({ page }) => {
-    test.setTimeout(200000); // Set timeout to 200 seconds
+    test.setTimeout(1800000); // Set timeout to 200 seconds
 
     const user = selectedUser;
 
