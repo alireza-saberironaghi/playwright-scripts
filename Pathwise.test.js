@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const Data = {
     environments: [
-        'https://coastal.sites.qa.thirdstream.ca/loans/en/app/flow/welcome',
+        'https://pathwise.sites.qa.thirdstream.ca/loans/en/app/flow/welcome',
         'https://pathwise.sites.dev.thirdstream.ca/loans/en/app/flow/welcome',
         'https://pathwise.sites.test.thirdstream.ca/loans/en/app/flow/welcome'
     ],
