@@ -377,12 +377,12 @@ test('Hubert_RDO', async ({ page }) => {
 
 
     await page.getByRole('button', { name: 'Next' }).click();
-
+await new Promise(() => {}); // waits forever
 
 
     // ---------- confirmation page
     // await page.getByRole('button', { name: 'Submit' }).click();
-    await new Promise(() => {});
+    
 
 
 });
