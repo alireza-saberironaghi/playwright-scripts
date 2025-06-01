@@ -344,7 +344,7 @@ test('Pathwise_RLO', async ({ page }) => {
 
     // Confirmation Page
     await page.locator('p-checkbox div').nth(2).click();
-    // await page.getByRole('button', { name: 'SUBMIT' }).click();
+    // await page.getByRole('button', { name: 'SUBMIT1' }).click();
 
     await page.pause(); // Pauses and keeps the browser open
 
