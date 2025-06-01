@@ -12,7 +12,7 @@ const Data = {
   ],
   users: [
     {
-      name: 'Jaime-Lakatos',
+      name: 'Jaime',
       firstName: 'Jaime',
       lastName: 'Lakatos',
       dob: { year: '1971', month: 'Jun', day: '3' },
@@ -81,7 +81,7 @@ const getUserByName = (name) => {
 const environment = Data.environments[1]; // 0 = Dev, 1 = QA, 2 = Test, 3 = Staging, 4 = Prod
 
 // 👤 Select Main User
-const selectedUser = getUserByName('Jaime-Lakatos'); // ['Jaime-Lakatos', 'Helen']
+const selectedUser = getUserByName('Jaime'); // ['Jaime-Lakatos', 'Helen']
 
 // 👥 Add Joint User?
 const selectAddJointApplicant = Data.accountOptions.addJointApplicant[1]; // 0 = Yes, 1 = No
