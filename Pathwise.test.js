@@ -346,7 +346,7 @@ test('Pathwise_RLO', async ({ page }) => {
     await page.locator('p-checkbox div').nth(2).click();
     // await page.getByRole('button', { name: 'SUBMIT1' }).click();
 
-    await page.pause(); // Pauses and keeps the browser open
+    await page.waitForTimeout(20 * 60 * 1000);
 
 });
 
