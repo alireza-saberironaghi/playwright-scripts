@@ -345,6 +345,9 @@ test('Pathwise_RLO', async ({ page }) => {
     // Confirmation Page
     await page.locator('p-checkbox div').nth(2).click();
     // await page.getByRole('button', { name: 'SUBMIT' }).click();
+
+    await page.pause(); // Pauses and keeps the browser open
+
 });
 
 // Function to generate a valid random SIN
