@@ -81,12 +81,12 @@ const getUserByName = (name) => {
 const environment = Data.environments[1]; // 0 = Dev, 1 = QA, 2 = Test, 3 = Staging, 4 = Prod
 
 // 👤 Select Main User
-const selectedUser = getUserByName('Jaime'); // ['Jaime-Lakatos', 'Helen']
+const selectedUser = getUserByName('Jaime'); // ['Jaime', 'Helen']
 
 // 👥 Add Joint User?
 const selectAddJointApplicant = Data.accountOptions.addJointApplicant[1]; // 0 = Yes, 1 = No
 // Select Joint User
-const selectedJointUser = getUserByName('Helen'); // ['Jaime-Lakatos', 'Helen']
+const selectedJointUser = getUserByName('Helen'); // ['Jaime', 'Helen']
 
 // 📧 Email and Cell
 const mainUserEmail = 'alex.saberi@thirdstream.ca';
