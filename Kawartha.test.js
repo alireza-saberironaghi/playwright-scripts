@@ -500,18 +500,6 @@ test('Kawartha_RDO', async ({ page }) => {
 
 
 
-
-
-
-
-
-  // end if
-
-  // await page.locator('p-radiobutton').filter({ hasText: 'No' }).locator('div').nth(2).click();
-
-  // await page.getByRole('button', { name: 'Next' }).click();
-  // await page.getByRole('dialog').getByRole('button', { name: 'Next' }).click()
-
   // ------ Personal Information Page
 
   // Personal Information Section
