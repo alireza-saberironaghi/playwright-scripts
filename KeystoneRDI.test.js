@@ -633,9 +633,6 @@ test('Keystone_RDI', async ({ page }) => {
     const thirdPartyIndividualDetails = getThirdPartyIndividualDetails(selectedIndividual);
 
 
-    // setting timeout
-    test.setTimeout(120000);
-
     // Load cookies from file
     // const cookies: Cookie[] = JSON.parse(fs.readFileSync('cookies.json', 'utf8'));
     // await page.context().addCookies(cookies);
