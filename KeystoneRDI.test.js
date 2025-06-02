@@ -275,8 +275,9 @@ test('Keystone_RDI', async ({ page }) => {
     test.setTimeout(120000);
 
     // Load cookies from file
-    const cookies = JSON.parse(fs.readFileSync('cookies.json', 'utf8'));
-    await page.context().addCookies(cookies);
+    const cookieFilePath = path.join(__dirname, 'cookies.json');
+const cookies: Cookie[] = JSON.parse(fs.readFileSync(cookieFilePath, 'utf8'));
+await page.context().addCookies(cookies);
 
     // Navigate to the website
     await page.goto(environment);
