@@ -636,7 +636,9 @@ test('Parama_RDI', async ({ page }) => {
 
 
     // Load cookies from file
-    const cookies = JSON.parse(fs.readFileSync('cookies.json', 'utf8'));
+    // const cookies: Cookie[] = JSON.parse(fs.readFileSync('cookies.json', 'utf8'));
+    // await page.context().addCookies(cookies);
+
     await page.context().addCookies(cookies);
 
     // Navigate to the website
@@ -753,26 +755,7 @@ test('Parama_RDI', async ({ page }) => {
         await page.getByRole('searchbox', { name: 'Employer Name' }).fill('thirdstream');
         await page.getByRole('option', { name: 'thirdstream 8 Street South,' }).click();
 
-        // if (user.employmentStatus === 'Employed' || user.employmentStatus === 'Self-Employed') {
-        //     // Fill in the 'Industry' field
-        //     await page.locator('span').filter({ hasText: 'emptyIndustry' }).locator('div').first().click(); // industry
-        //     await page.waitForTimeout(50);
-        //     await page.getByText(user.industry, { exact: true }).click();
 
-        //     // Fill in the 'Occupation' field
-        //     await page.locator('span').filter({ hasText: 'emptyOccupation' }).locator('div').first().click(); // Occupation
-        //     await page.waitForTimeout(100);
-        //     await page.getByText(user.occupation, { exact: true }).click();
-
-        //     // Fill in the 'Employer Name' field
-        //     await page.getByLabel('Employer Name').click(); // Employer name
-        //     await page.getByLabel('Employer Name').fill('Thirdstream');
-        //     await page.waitForTimeout(100);
-        //     await page.getByRole('option', { name: 'thirdstream 8 Street South,' }).click(); // thirdstream
-
-        //     // button
-        //     await page.getByRole('button', { name: 'Submit' }).click();
-        // }
 
 
         // ---- miscellaneous
@@ -911,26 +894,6 @@ test('Parama_RDI', async ({ page }) => {
     //         await page.locator('span').filter({ hasText: 'emptyHave you been working' }).locator('div').first().click();
     //         await page.getByRole('option', { name: 'Yes' }).click();
 
-    //         // if (user.employmentStatus === 'Employed' || user.employmentStatus === 'Self-Employed') {
-    //         //     // Fill in the 'Industry' field
-    //         //     await page.locator('span').filter({ hasText: 'emptyIndustry' }).locator('div').first().click(); // industry
-    //         //     await page.waitForTimeout(50);
-    //         //     await page.getByText(user.industry, { exact: true }).click();
-
-    //         //     // Fill in the 'Occupation' field
-    //         //     await page.locator('span').filter({ hasText: 'emptyOccupation' }).locator('div').first().click(); // Occupation
-    //         //     await page.waitForTimeout(100);
-    //         //     await page.getByText(user.occupation, { exact: true }).click();
-
-    //         //     // Fill in the 'Employer Name' field
-    //         //     await page.getByLabel('Employer Name').click(); // Employer name
-    //         //     await page.getByLabel('Employer Name').fill('Thirdstream');
-    //         //     await page.waitForTimeout(100);
-    //         //     await page.getByRole('option', { name: 'thirdstream 8 Street South,' }).click(); // thirdstream
-
-    //         //     // button
-    //         //     await page.getByRole('button', { name: 'Submit' }).click();
-    //         // }
 
     //         // ---- things we need to ask
     //         // natture of your business?
@@ -1044,42 +1007,6 @@ test('Parama_RDI', async ({ page }) => {
     //     await page.waitForTimeout(100);
     //     await page.locator("(//li[@role='option'])[1]").click();
 
-
-    //     // ---- employment
-
-    //     // employment status
-    //     await page.locator('span').filter({ hasText: 'emptyEmployment Status' }).locator('div').first().click();
-    //     await page.getByRole('option', { name: thirdPartyIndividualDetails.employmentStatus, exact: true }).click();
-    //     // industry
-    //     await page.locator('span').filter({ hasText: 'emptyIndustry' }).locator('div').first().click();
-    //     await page.getByRole('option', { name: thirdPartyIndividualDetails.industry }).click();
-    //     // occupation
-    //     await page.locator('span').filter({ hasText: 'emptyOccupation' }).locator('div').first().click();
-    //     await page.getByRole('option', { name: thirdPartyIndividualDetails.occupation, exact: true }).nth(0).click();
-    //     // employer name
-    //     await page.getByRole('searchbox', { name: 'Employer Name' }).fill('thirdstream');
-    //     await page.getByRole('option', { name: 'thirdstream 8 Street South,' }).click();
-    //     await page.getByRole('button', { name: 'Submit' }).click();
-
-
-    //     // if (thirdPartyIndividualDetails.employmentStatus === 'Employed' || thirdPartyIndividualDetails.employmentStatus === 'Self-Employed') {
-    //     //     // Fill in the 'Industry' field
-    //     //     await page.locator('span').filter({ hasText: 'emptyIndustry' }).locator('div').first().click(); // industry
-    //     //     await page.waitForTimeout(50);
-    //     //     await page.getByText(thirdPartyIndividualDetails.industry, { exact: true }).click();
-
-    //     //     // Fill in the 'Employer Name' field
-    //     //     await page.getByLabel('Employer Name').click(); // Employer name
-    //     //     await page.getByLabel('Employer Name').fill('Thirdstream');
-    //     //     await page.waitForTimeout(100);
-    //     //     await page.getByRole('option', { name: 'thirdstream 8 Street South,' }).click(); // thirdstream
-
-    //     //     // button
-    //     //     await page.getByRole('button', { name: 'Submit' }).click();
-    //     // }
-
-    //     await page.locator("button[title='Next button']").click();  // Next button
-    // }
 
 
 
