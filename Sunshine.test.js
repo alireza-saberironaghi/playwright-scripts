@@ -219,7 +219,7 @@ const primaryUser = Data.users.find(user => user.name === 'Chrit'); // Chrit, DE
 // 👥 Add Joint User?
 const selectAddJointApplicant = Data.accountOptions.addJointApplicant[0]; // 0 = Yes, 1 = No
 // Select Joint User
-const jointUser = Data.users.find(user => user.name === 'Chritjoint');  // Chrit, DEREK, JASPER, ANTOINE, TRISTAN, GRANT, ELI
+const jointUser = Data.users.find(user => user.name === 'DEREK');  // Chrit, DEREK, JASPER, ANTOINE, TRISTAN, GRANT, ELI
 
 // 📧 Email and Cell
 const mainUserEmail = 'alex.saberi@thirdstream.ca';
