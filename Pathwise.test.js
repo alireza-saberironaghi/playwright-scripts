@@ -264,34 +264,34 @@ test('Pathwise_RLO', async ({ page }) => {
     await page.locator('input[name="dob"]').click();
 
     // Navigate to correct year
-    if(user.dob.year >= '1990' && user.dob.year <= '1999'){
-        await page.getByRole('button', { name: '' }).click();
-    }
-    if(user.dob.year >= '1970' && user.dob.year <= '1979'){
-        await page.getByRole('button', { name: '' }).click();
-    }
-    if(user.dob.year >= '1960' && user.dob.year <= '1969'){
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-    }
-    if(user.dob.year >= '1950' && user.dob.year <= '1959'){
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-    }
-    if(user.dob.year >= '1940' && user.dob.year <= '1949'){
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-    }
-    if(user.dob.year >= '1930' && user.dob.year <= '1939'){
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-        await page.getByRole('button', { name: '' }).click();
-    }
+  if (user.dob.year >= '1990' && user.dob.year <= '1999') {
+    await page.getByRole('button', { name: '' }).click();
+  }
+  if (user.dob.year >= '1970' && user.dob.year <= '1979') {
+    await page.getByRole('button', { name: '' }).click();
+  }
+  if (user.dob.year >= '1960' && user.dob.year <= '1969') {
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+  }
+  if (user.dob.year >= '1950' && user.dob.year <= '1959') {
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+  }
+  if (user.dob.year >= '1940' && user.dob.year <= '1949') {
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+  }
+  if (user.dob.year >= '1930' && user.dob.year <= '1939') {
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+    await page.getByRole('button', { name: '' }).click();
+  }
 
     await page.getByText(user.dob.year, { exact: true }).first().click();
     await page.getByText(user.dob.month, { exact: true }).first().click();
