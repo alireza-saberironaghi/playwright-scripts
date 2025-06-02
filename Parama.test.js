@@ -1,4 +1,4 @@
-import { test, Cookie } from '@playwright/test';
+import { test } from '@playwright/test';
 import https from 'https';
 import fs from 'fs';
 
