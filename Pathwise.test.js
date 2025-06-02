@@ -695,10 +695,11 @@ test('Pathwise_RLO', async ({ page }) => {
 
     // Confirmation Page
     await page.locator('p-checkbox div').nth(2).click();
+    
+    await new Promise(() => { });
     // await page.getByRole('button', { name: 'SUBMIT' }).click();
 
 
-    await new Promise(() => { });
 
 });
 
