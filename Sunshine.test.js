@@ -677,9 +677,10 @@ test('Sunshine_RDO', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Next' }).click();
   }
+  await new Promise(() => { });
   // Last submit
   // await page.getByRole('button', { name: 'Submit' }).click();
-  await new Promise(() => { });
+  
 });
 
 
