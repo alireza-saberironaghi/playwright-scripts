@@ -11,7 +11,7 @@ const Data = {
   ],
   users: [
     {
-      name: 'Pearl-Completed',
+      name: 'Pearl',
       firstName: 'Pearl',
       lastName: 'Testswansie',
       dob: { year: '1959', month: 'Jan', day: '11' },
@@ -24,35 +24,6 @@ const Data = {
       taxResident: 'No',
       usPerson: 'No'
     },
-    {
-      name: 'Pearl-Review',
-      firstName: 'Pearl',
-      lastName: 'Testswansie',
-      dob: { year: '1959', month: 'Jan', day: '11' },
-      sinNumber: generateRandomSIN(),
-      address: '50 Weybright Crt Scarborough, ON, M1S 5A8',
-      employmentStatus: 'Employed',  // options: Employed, Self-Employed, Unemployed, Retired, Student
-      password: 'Thirdstream1@',
-      branch: 'Cobourg Branch',
-      politicallyExposed: 'None of the above',
-      taxResident: 'No',
-      usPerson: 'No'
-    },
-    {
-      name: 'Pearl-Declined',
-      firstName: 'Pearl',
-      lastName: 'Testswansie',
-      dob: { year: '1959', month: 'Jan', day: '11' },
-      sinNumber: generateRandomSIN(),
-      address: '50 Weybright Crt Scarborough, ON, M1S 5A8',
-      employmentStatus: 'Employed',  // options: Employed, Self-Employed, Unemployed, Retired, Student
-      password: 'Thirdstream1@',
-      branch: 'Cobourg Branch',
-      politicallyExposed: 'None of the above',
-      taxResident: 'No',
-      usPerson: 'No'
-    },
-
     {
       name: 'Tim',
       firstName: 'Tim',
