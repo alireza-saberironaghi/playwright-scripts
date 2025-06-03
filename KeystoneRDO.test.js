@@ -573,10 +573,10 @@ test('Keystone_RDO', async ({ page }) => {
 
     }
 
-
+await new Promise(() => { });
     // ---------- confirmation page
     // await page.getByRole('button', { name: 'Submit' }).click();
-    await new Promise(() => { });
+    
 
 
 
