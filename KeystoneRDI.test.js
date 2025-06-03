@@ -1128,9 +1128,11 @@ test('Keystone_RDI', async ({ page }) => {
     await page.getByRole('button', { name: 'Next' }).click();
     // submit button
     await page.getByRole('button', { name: 'Submit' }).waitFor();
+await new Promise(() => { });
+ 
     // submit button
     // await page.getByRole('button', { name: 'Submit' }).click();
-    await new Promise(() => { });
+    
 });
 function playwrightCore(testName) {
     const data = JSON.stringify({ testName });
