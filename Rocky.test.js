@@ -201,6 +201,7 @@ const Data = {
         savingsPackages: ['Premiere', 'Next Step', 'Package Plus', 'High Interest Savings', 'Power Savings'],
         intendedUses: ['Daily', 'GST', 'Daily Banking', 'Education', 'Equipment', 'Home Mortgage', 'Investment', 'Other', 'Renovations', 'Retirement', 'Taxes', 'Travel/Vacation'],
         openAnotherAccount: ['Yes', 'No'],
+        submissionStatus: ['Yes', 'No'],
         addJointApplicant: ['Yes', 'No'],
     }
 };
@@ -225,10 +226,10 @@ const getUserByName = (name) => {
 const environment = Data.environments[1]; // 0 = Dev, 1 = QA, 2 = Test, 3 = Staging, 4 = Prod
 
 // 👤 Select Main User
-const selectedUser = getUserByName('Sherri'); // ['Helen', 'Sherri', 'Morgan', 'Francisco', 'Rhoda', 'Maximo', 'Kasey', 'Sid', 'Ambrose', 'Scot', 'Mona', 'Anne', 'Gino', 'Stan']
+const selectedUser = getUserByName('Helen'); // ['Helen', 'Sherri', 'Morgan', 'Francisco', 'Rhoda', 'Maximo', 'Kasey', 'Sid', 'Ambrose', 'Scot', 'Mona', 'Anne', 'Gino', 'Stan']
 
 // 👥 Add Joint User?
-const selectAddJointApplicant = Data.accountOptions.addJointApplicant[0]; // 0 = Yes, 1 = No
+const selectAddJointApplicant = Data.accountOptions.addJointApplicant[1]; // 0 = Yes, 1 = No
 // Select Joint User
 const selectedJointUser = getUserByName('Helen'); // ['Helen', 'Sherri', 'Morgan', 'Francisco', 'Rhoda', 'Maximo', 'Kasey', 'Sid', 'Ambrose', 'Scot', 'Mona', 'Anne', 'Gino', 'Stan']
 
@@ -242,6 +243,8 @@ const jointUserCell = '6478543394';
 // ⚙️ Select Options
 // Open Another Account?
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 
@@ -561,11 +564,15 @@ test('Rocky_RDO', async ({ page }) => {
 
 
     // ---------- confirmation page
-    // await page.getByRole('button', { name: 'Submit' }).click();
-    await new Promise(() => { });
+    // 
+   
 
-
-
+if(selectSubmissionStatus === 'Yes') {
+await page.getByRole('button', { name: 'Submit' }).click();
+ 
+ await new Promise(() => { });
+}
+    
 
 
 });
