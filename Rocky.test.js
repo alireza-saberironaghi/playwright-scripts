@@ -561,21 +561,21 @@ test('Rocky_RDO', async ({ page }) => {
         await page.getByRole('button', { name: 'Next' }).click();
 
 
-        await page.waitForTimeout(30 * 60 * 1000); // 30 minutes
 
     }
 
 
     // ---------- confirmation page
-    // 
-   
 
-if(selectSubmissionStatus === 'Yes') {
-await page.getByRole('button', { name: 'Submit' }).click();
- 
- await new Promise(() => { });
-}
-    
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
+
 
 
 });
