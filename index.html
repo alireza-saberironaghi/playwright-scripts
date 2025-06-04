@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto App Runner - Thirdstream</title>
+  <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <!-- Company Logo & App Title -->
+        <div style="display: flex; align-items: center;">
+          <!-- Light theme logo -->
+          <img src="https://static.wixstatic.com/media/897684_688e9adf83024feca004f62407679ec3~mv2.png/v1/fill/w_274,h_61,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.png" 
+               alt="Thirdstream Logo" 
+               class="company-logo light">
+          <!-- Dark theme logo -->
+          <img src="https://static.wixstatic.com/media/897684_e3dcea3ddc734ebba8bbfc84084799ba~mv2.png/v1/crop/x_279,y_426,w_4721,h_1206/fill/w_242,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2.png" 
+               alt="Thirdstream Logo" 
+               class="company-logo dark">
+          <div class="app-title">
+            <span class="app-name">Auto App Runner</span>
+            <span class="version-tag">v1.0</span>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <!-- Theme Toggle -->
+          <button id="themeToggle" class="theme-toggle" title="Toggle theme">
+            <div class="theme-toggle-slider">
+              <span id="themeIcon">☀️</span>
+            </div>
+          </button>
+          
+          <!-- Status Indicator -->
+          <div id="statusIndicator" class="status-indicator ready">
+            <div class="status-dot"></div>
+            <span id="statusText">Ready</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Daily Motivation Banner -->
+      <div class="motivation-banner">
+        <div class="motivation-content">
+          <div class="motivation-icon">💡</div>
+          <div class="motivation-text">
+            <div class="motivation-quote" id="motivationQuote">
+              "Quality is not an act, it is a habit."
+            </div>
+            <div class="motivation-author" id="motivationAuthor">
+              - Aristotle
+            </div>
+          </div>
+          <button class="motivation-refresh" id="refreshMotivation" title="New quote">
+            ↻
+          </button>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <!-- Configuration Panel -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              ⚙ Configuration
+            </h2>
+          </div>
+          <div class="card-body">
+            <!-- Basic Settings -->
+            <div class="form-section">
+              <div class="form-group">
+                <label class="form-label" for="scriptSelect">Tenant</label>
+                <select id="scriptSelect" class="form-control">
+                  <option value="pathwise">Pathwise RLO</option>
+                  <option value="kawartha">Kawartha RDO</option>
+                  <option value="sunshine">Sunshine RDO</option>
+                  <option value="hubert">Hubert RDO</option>
+                  <option value="assiniboine">Assiniboine</option>
+                  <option value="coastal">Coastal RLO</option>
+                  <option value="wealthone">WealthOne RDO</option>
+                  <option value="vancity">Vancity</option>
+                  <option value="keystonerdo">Keystone RDO</option>
+                  <option value="keystonerdi">Keystone RDI</option>
+                  <option value="parama">Parama RDI</option>
+                  <option value="rocky">Rocky RDO</option>
+                </select>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="envSelect">Environment</label>
+                  <select id="envSelect" class="form-control">
+                    <option value="dev">Dev</option>
+                    <option value="qa">QA</option>
+                    <option value="test">Test</option>
+                    <option value="staging">Staging</option>
+                    <option value="prod">Prod</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="mainUserSelect">Main User</label>
+                  <select id="mainUserSelect" class="form-control">
+                    <option>Pearl</option>
+                    <option>Chrit</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="mainEmail">Main User Email</label>
+                  <input type="email" id="mainEmail" class="form-control" placeholder="alex.saberi@thirdstream.ca" value="email@thirdstream.ca" />
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="mainCell">Main User Cell</label>
+                  <input type="text" id="mainCell" class="form-control" placeholder="6478543392" value="6478888888" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="executionMode">Execution Mode</label>
+                <select id="executionMode" class="form-control">
+                  <option value="headed">Normal (With UI)</option>
+                  <option value="headless">Headless (Without UI - Faster)</option>
+                  <option value="debug">Debug (Step-by-step with UI)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="submitApplication">Submit Application?</label>
+                <select id="submitApplication" class="form-control">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic Sections -->
+            <!-- Joint Applicant Section -->
+            <div id="jointSection" class="toggle-section hidden">
+              <div class="toggle-header" onclick="toggleSection('jointContent')">
+                <span>Joint Applicant Options</span>
+                <span class="toggle-icon">▶</span>
+              </div>
+              <div id="jointContent" class="toggle-content">
+                <div class="form-group">
+                  <label class="form-label" for="addJointSelect">Add Joint Applicant?</label>
+                  <select id="addJointSelect" class="form-control">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="jointUserSelect">Joint User</label>
+                  <select id="jointUserSelect" class="form-control">
+                    <option>Helen</option>
+                    <option>Sherri</option>
+                    <option>Morgan</option>
+                    <option>Francisco</option>
+                    <option>Rhoda</option>
+                    <option>Maximo</option>
+                    <option>Kasey</option>
+                    <option>Sid</option>
+                    <option>Ambrose</option>
+                    <option>Scot</option>
+                    <option>Mona</option>
+                    <option>Anne</option>
+                    <option>Gino</option>
+                    <option>Stan</option>
+                  </select>
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="jointEmail">Joint User Email</label>
+                    <input type="email" id="jointEmail" class="form-control" placeholder="joint.alex.saberi@thirdstream.ca" value="jointEmail@thirdstream.ca" />
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="jointCell">Joint User Cell</label>
+                    <input type="text" id="jointCell" class="form-control" placeholder="6478543394" value="6474444444" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Power of Attorney Section -->
+            <div id="powerSection" class="toggle-section hidden">
+              <div class="toggle-header" onclick="toggleSection('powerContent')">
+                <span>Power of Attorney</span>
+                <span class="toggle-icon">▶</span>
+              </div>
+              <div id="powerContent" class="toggle-content">
+                <div class="form-group">
+                  <label class="form-label" for="addPowerOfAttorney">Add Power of Attorney?</label>
+                  <select id="addPowerOfAttorney" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="powerUserSelect">Power of Attorney User</label>
+                  <select id="powerUserSelect" class="form-control">
+                    <option>Helen</option>
+                    <option>Tom</option>
+                  </select>
+                </div>
+
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="powerEmail">Power of Attorney Email</label>
+                    <input type="email" id="powerEmail" class="form-control" placeholder="alex.saberi@thirdstream.ca" value="email@thirdstream.ca" />
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label" for="powerCell">Power of Attorney Cell</label>
+                    <input type="text" id="powerCell" class="form-control" placeholder="6478543392" value="6478888888" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Third Party Section -->
+            <div id="thirdpartySection" class="toggle-section hidden">
+              <div class="toggle-header" onclick="toggleSection('thirdpartyContent')">
+                <span>Third Party Options</span>
+                <span class="toggle-icon">▶</span>
+              </div>
+              <div id="thirdpartyContent" class="toggle-content">
+                <div class="form-group">
+                  <label class="form-label" for="selectThirdpartyOptions">Select Thirdparty Options</label>
+                  <select id="selectThirdpartyOptions" class="form-control">
+                    <option value="Yes, on behalf of a business">Yes, on behalf of a business</option>
+                    <option value="Yes, on behalf of an individual">Yes, on behalf of an individual</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div class="form-group" id="thirdpartyBusinessGroup">
+                  <label class="form-label" for="thirdpartyBusiness">Thirdparty Business</label>
+                  <select id="thirdpartyBusiness" class="form-control">
+                    <option value="amazon">Amazon</option>
+                    <option value="thirdstream">Thirdstream</option>
+                  </select>
+                </div>
+
+                <div class="form-group hidden" id="thirdpartyIndividualGroup">
+                  <label class="form-label" for="thirdpartyIndividual">Thirdparty Individual</label>
+                  <select id="thirdpartyIndividual" class="form-control">
+                    <option value="johnDoe">John Doe</option>
+                    <option value="janeSmith">Jane Smith</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Account Options Section -->
+            <div id="accountOptionsSection" class="toggle-section hidden">
+              <div class="toggle-header" onclick="toggleSection('accountContent')">
+                <span>Account Options</span>
+                <span class="toggle-icon">▶</span>
+              </div>
+              <div id="accountContent" class="toggle-content">
+                <div class="form-group">
+                  <label class="form-label" for="openAnotherAccount">Open Another Account?</label>
+                  <select id="openAnotherAccount" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <!-- Assiniboine-specific options -->
+                <div id="assiniboineOptions" class="hidden">
+                  <div class="form-grid">
+                    <div class="form-group">
+                      <label class="form-label" for="selectOverdraft">Select Overdraft</label>
+                      <select id="selectOverdraft" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="selectDebitCard">Select Debit Card</label>
+                      <select id="selectDebitCard" class="form-control">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Vancity-specific options -->
+                <div id="vancityOptions" class="hidden">
+                  <div class="form-group">
+                    <label class="form-label" for="selectAccount">Select Account</label>
+                    <select id="selectAccount" class="form-control">
+                      <option value="Essential Chequing">Essential Chequing</option>
+                      <option value="Essential Plus Chequing">Essential Plus Chequing</option>
+                      <option value="Jumpstart High Interest Savings">Jumpstart High Interest Savings</option>
+                      <option value="Pay As You Go Chequing">Pay As You Go Chequing</option>
+                      <option value="Total Chequing">Total Chequing</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Keystone RDO-specific options -->
+                <div id="keystoneOptions" class="hidden">
+                  <div class="form-group">
+                    <label class="form-label" for="selectOverdraftKeystone">Select Overdraft</label>
+                    <select id="selectOverdraftKeystone" class="form-control">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Keystone RDI-specific options -->
+                <div id="keystoneRDIOptions" class="hidden">
+                  <div class="form-group">
+                    <label class="form-label" for="selectOverdraftKeystoneRDI">Select Overdraft</label>
+                    <select id="selectOverdraftKeystoneRDI" class="form-control">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Execution Panel -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              ▶ Execution Control
+            </h2>
+          </div>
+          <div class="card-body">
+            <!-- Single Test Execution -->
+            <div class="form-section">
+              <div class="section-title">Single test execution</div>
+              <div class="button-group">
+                <button id="runTest" class="btn btn-primary">
+                  ▶ Run Test
+                </button>
+                <button id="pauseTest" class="btn btn-warning hidden">
+                  ⏸ Pause
+                </button>
+                <button id="stopTest" class="btn btn-danger hidden">
+                  ⏹ Stop
+                </button>
+              </div>
+            </div>
+
+            <!-- Batch Execution -->
+            <div class="form-section">
+              <div class="section-title">Parallel execution</div>
+              <div class="button-group">
+                <button id="addToBatchFromMain" class="btn btn-success">
+                  + Add to Parallel Run
+                </button>
+                <button id="batchRun" class="btn btn-success">
+                  ≡ Parallel Run
+                  <span class="parallel-badge">
+                    ⚡ PARALLEL
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Utilities -->
+            <div class="form-section">
+              <div class="section-title">Utilities</div>
+              <div class="button-group">
+                <button id="refreshButton" class="btn btn-secondary">
+                  ↻ Refresh Scripts
+                </button>
+                <button id="openAdminLink" class="btn btn-primary">
+                  ↗ Open Admin Panel (DEV)
+                </button>
+                <button id="openWorkflowsLink" class="btn btn-primary">
+                  🔄 Open Workflows (DEV)
+                </button>
+              </div>
+            </div>
+
+            <div id="status" class="status hidden"></div>
+          </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="output-panel">
+          <div class="output-header">
+            <div class="output-title">📄 Output</div>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="copyOutput" class="btn btn-success btn-sm">
+                ⧉ Copy
+              </button>
+              <button id="reportIssue" class="btn btn-primary btn-sm">
+                ⚠ Report Issue
+              </button>
+              <button id="clearOutput" class="btn btn-secondary btn-sm">
+                × Clear
+              </button>
+            </div>
+          </div>
+          <div id="output" class="output-content"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-text">
+        <span>Designed and Developed with</span>
+        <span class="footer-heart">♥</span>
+        <span>for Thirdstream</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="notification" class="notification"></div>
+
+  <!-- Parallel Batch Execution Modal -->
+  <div id="batchModal" class="modal">
+    <div class="modal-content" style="max-width: 900px; width: 95%;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          ≡ Parallel Execution
+          <span class="parallel-badge">
+            ⚡ PARALLEL MODE
+          </span>
+        </h3>
+        <button class="modal-close" onclick="closeBatchModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-text" style="margin-bottom: 1.5rem;">
+          Add multiple test configurations to run them <strong>simultaneously</strong>. All tests will start at the same time and run in parallel, dramatically reducing total execution time.
+        </div>
+        
+        <!-- Clear Batch Button -->
+        <div style="margin-bottom: 1.5rem;">
+          <button id="clearBatch" class="btn btn-secondary btn-sm">
+            × Clear All
+          </button>
+        </div>
+
+        <!-- Batch Queue Display -->
+        <div class="modal-contact">
+          <div class="modal-contact-title">Batch Queue (<span id="batchCount">0</span> tests):</div>
+          <div id="batchQueue" class="modal-contact-info" style="max-height: 200px; overflow-y: auto; font-size: 0.8rem;">
+            <div style="color: var(--text-secondary); font-style: italic;">No tests in queue.</div>
+          </div>
+        </div>
+
+        <!-- Parallel Progress -->
+        <div id="batchProgress" class="hidden" style="margin-top: 1rem;">
+          <div class="modal-contact-title">Parallel Execution Progress:</div>
+          <div class="parallel-progress">
+            <div class="parallel-progress-bar">
+              <div id="batchProgressBar" class="parallel-progress-fill"></div>
+            </div>
+          </div>
+          <div id="batchStatus" style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">Ready to start parallel execution...</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeBatchModal()">Close</button>
+        <button id="startBatch" class="btn btn-primary btn-sm" disabled>
+          ▶ Start Parallel Execution
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Issue Modal -->
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Report an Issue</h3>
+        <button class="modal-close" onclick="closeReportModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-text">
+          If you encounter any issues or errors while using the Auto App Runner, please help us improve by reporting them.
+        </div>
+        <div class="modal-contact">
+          <div class="modal-contact-title">How to Report:</div>
+          <div class="modal-contact-info">
+            1. Copy the error message from the output panel above<br>
+            2. Send a message to <strong>Alex Saberi</strong> in Teams<br>
+            3. We'll investigate and get back to you as soon as possible
+          </div>
+        </div>
+        <div class="modal-contact" style="margin-top: 1rem;">
+          <div class="modal-contact-title">💡 Have Ideas?</div>
+          <div class="modal-contact-info">
+            If you have any recommendations or ideas to improve the app, feel free to share them with Alex Saberi in Teams. Your feedback helps make the Auto App Runner better for everyone!
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeReportModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global user configuration - loaded from online source
+    let userConfig = {};
+
+    // Default fallback configuration in case online loading fails
+    const defaultUserConfig = {
+      pathwise: ['Pearl', 'Chrit'],
+      hubert: ['Helen', 'Sherri', 'Morgan', 'Rhoda', 'Maximo', 'Kasey', 'Sid', 'Scot'],
+      assiniboine: ['Helen', 'Jaime'],
+      coastal: ['Pearl', 'Chrit'],
+      wealthone: ['Helen', 'Sandra'],
+      vancity: ['Helen'],
+      keystonerdo: ['Helen', 'Sherri'],
+      keystonerdi: ['Helen', 'Tom'],
+      parama: ['Sue'],
+      rocky: ['Helen', 'Sandra'],
+      kawartha: ['Pearl', 'Tim'],
+      sunshine: ['Chrit', 'DEREK']
+    };
+
+    // Load user configuration from online source
+    async function loadUserConfiguration() {
+      try {
+        console.log('Loading user configuration from online source...');
+        const result = await window.electronAPI.loadUserConfig();
+        
+        if (result.success && result.config) {
+          userConfig = result.config;
+          console.log('User configuration loaded successfully:', userConfig);
+          window.showNotification('User configuration updated from online source', 'success');
+        } else {
+          throw new Error(result.error || 'Failed to load user configuration');
+        }
+      } catch (error) {
+        console.error('Failed to load online user configuration, using defaults:', error);
+        userConfig = defaultUserConfig;
+        window.showNotification('Using default user configuration (online load failed)', 'warning');
+      }
+    }
+
+    const adminUrls = {
+      sunshine: {
+        dev: 'https://sunshine.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://sunshine.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://sunshine.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://sunshine.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://sunshine.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      kawartha: {
+        dev: 'https://kawartha.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://kawartha.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://kawartha.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://kawartha.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://kawartha.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      pathwise: {
+        dev: 'https://pathwise.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://pathwise.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://pathwise.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://pathwise.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://pathwise.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      hubert: {
+        dev: 'https://hubert.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://hubert.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://hubert.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://hubert.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://hubert.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      assiniboine: {
+        dev: 'https://assiniboine.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://assiniboine.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://assiniboine.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://assiniboine.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://assiniboine.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      coastal: {
+        dev: 'https://coastal.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://coastal.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://coastal.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://coastal.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://coastal.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      wealthone: {
+        dev: 'https://wealthone.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://wealthone.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://wealthone.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://wealthone.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://wealthone.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      vancity: {
+        dev: 'https://vancity.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://vancity.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://vancity.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://vancity.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://vancity.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      keystonerdo: {
+        dev: 'https://keystonerdo.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://keystonerdo.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://keystonerdo.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://keystonerdo.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://keystonerdo.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      keystonerdi: {
+        dev: 'https://keystonerdi.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://keystonerdi.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://keystonerdi.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://keystonerdi.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://keystonerdi.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      parama: {
+        dev: 'https://parama.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://parama.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://parama.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://parama.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://parama.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      },
+      rocky: {
+        dev: 'https://rocky.sites.dev.thirdstream.ca/admin/deposits/en/app/applications',
+        qa: 'https://rocky.sites.qa.thirdstream.ca/admin/deposits/en/app/applications',
+        test: 'https://rocky.sites.test.thirdstream.ca/admin/deposits/en/app/applications',
+        staging: 'https://rocky.sites.staging.thirdstream.ca/admin/deposits/en/app/applications',
+        prod: 'https://rocky.sites.prod.thirdstream.ca/admin/deposits/en/app/applications'
+      }
+    };
+
+    // Workflow URLs for all tenants
+    const workflowUrls = {
+      sunshine: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/sunshine/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/sunshine/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/sunshine/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/sunshine/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/sunshine/workflows'
+      },
+      kawartha: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/kawartha/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/kawartha/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/kawartha/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/kawartha/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/kawartha/workflows'
+      },
+      pathwise: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/pathwise/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/pathwise/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/pathwise/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/pathwise/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/pathwise/workflows'
+      },
+      hubert: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/hubert/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/hubert/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/hubert/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/hubert/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/hubert/workflows'
+      },
+      assiniboine: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/assiniboine/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/assiniboine/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/assiniboine/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/assiniboine/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/assiniboine/workflows'
+      },
+      coastal: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/coastal/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/coastal/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/coastal/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/coastal/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/coastal/workflows'
+      },
+      wealthone: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/wealthone/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/wealthone/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/wealthone/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/wealthone/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/wealthone/workflows'
+      },
+      vancity: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/vancity/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/vancity/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/vancity/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/vancity/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/vancity/workflows'
+      },
+      keystonerdo: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/keystonerdo/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/keystonerdo/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/keystonerdo/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/keystonerdo/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/keystonerdo/workflows'
+      },
+      keystonerdi: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/keystonerdi/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/keystonerdi/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/keystonerdi/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/keystonerdi/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/keystonerdi/workflows'
+      },
+      parama: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/parama/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/parama/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/parama/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/parama/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/parama/workflows'
+      },
+      rocky: {
+        dev: 'https://support.dev.thirdstream.ca/tenants/rocky/workflows',
+        qa: 'https://support.qa.thirdstream.ca/tenants/rocky/workflows',
+        test: 'https://support.test.thirdstream.ca/tenants/rocky/workflows',
+        staging: 'https://support.staging.thirdstream.ca/tenants/rocky/workflows',
+        prod: 'https://support.prod.thirdstream.ca/tenants/rocky/workflows'
+      }
+    };
+
+    // Function to update admin panel button text
+    function updateAdminPanelButton() {
+      const selectedEnvironment = document.getElementById('envSelect').value;
+      const adminButton = document.getElementById('openAdminLink');
+      const workflowButton = document.getElementById('openWorkflowsLink');
+      
+      if (adminButton) {
+        adminButton.textContent = `↗ Open Admin Panel (${selectedEnvironment.toUpperCase()})`;
+      }
+      
+      if (workflowButton) {
+        workflowButton.textContent = `🔄 Open Workflows (${selectedEnvironment.toUpperCase()})`;
+      }
+    }
+
+    async function openWorkflows() {
+      const selectedScript = document.getElementById('scriptSelect').value;
+      const selectedEnvironment = document.getElementById('envSelect').value;
+      
+      console.log('Opening workflows for:', selectedScript, selectedEnvironment);
+      
+      // Get the workflow URL for the selected script and environment
+      if (workflowUrls[selectedScript] && workflowUrls[selectedScript][selectedEnvironment]) {
+        const workflowUrl = workflowUrls[selectedScript][selectedEnvironment];
+        console.log('Workflow URL:', workflowUrl);
+        
+        try {
+          // Check if electronAPI is available
+          if (!window.electronAPI || !window.electronAPI.openExternalLink) {
+            console.error('electronAPI.openExternalLink not available, using fallback');
+            // Fallback: try to use window.open as last resort
+            window.open(workflowUrl, '_blank');
+            window.showNotification('Opened workflows (fallback method)', 'success');
+            return;
+          }
+          
+          // Open in default browser using Electron's shell
+          const result = await window.electronAPI.openExternalLink(workflowUrl);
+          console.log('Result from openExternalLink:', result);
+          
+          if (result && result.success) {
+            // Show success notification
+            const scriptNames = {
+              pathwise: 'Pathwise RLO',
+              kawartha: 'Kawartha RDO',
+              sunshine: 'Sunshine RDO',
+              hubert: 'Hubert RDO',
+              assiniboine: 'Assiniboine',
+              coastal: 'Coastal RLO',
+              wealthone: 'WealthOne RDO',
+              vancity: 'Vancity',
+              keystonerdo: 'Keystone RDO',
+              keystonerdi: 'Keystone RDI',
+              parama: 'Parama RDI',
+              rocky: 'Rocky RDO'
+            };
+            
+            const scriptName = scriptNames[selectedScript] || selectedScript;
+            window.showNotification(`Opened ${scriptName} ${selectedEnvironment.toUpperCase()} workflows in browser`, 'success');
+          } else {
+            console.error('Failed to open external link:', result ? result.error : 'Unknown error');
+            // Try fallback method
+            console.log('Trying fallback method...');
+            window.open(workflowUrl, '_blank');
+            window.showNotification('Opened workflows (fallback method)', 'success');
+          }
+        } catch (error) {
+          console.error('Error opening workflows:', error);
+          // Try fallback method
+          try {
+            console.log('Trying fallback method due to error...');
+            window.open(workflowUrl, '_blank');
+            window.showNotification('Opened workflows (fallback method)', 'success');
+          } catch (fallbackError) {
+            console.error('Fallback method also failed:', fallbackError);
+            window.showNotification(`Error opening workflows: ${error.message}`, 'error');
+          }
+        }
+      } else {
+        // Show error if workflow URL not available
+        console.log('Workflow URL not found for:', selectedScript, selectedEnvironment);
+        window.showNotification('Workflows not available for this tenant/environment', 'warning');
+      }
+    }
+
+    async function openAdminPanel() {
+      const selectedScript = document.getElementById('scriptSelect').value;
+      const selectedEnvironment = document.getElementById('envSelect').value;
+      
+      console.log('Opening admin panel for:', selectedScript, selectedEnvironment);
+      
+      // Get the admin URL for the selected script and environment
+      if (adminUrls[selectedScript] && adminUrls[selectedScript][selectedEnvironment]) {
+        const adminUrl = adminUrls[selectedScript][selectedEnvironment];
+        console.log('Admin URL:', adminUrl);
+        
+        try {
+          // Check if electronAPI is available
+          if (!window.electronAPI || !window.electronAPI.openExternalLink) {
+            console.error('electronAPI.openExternalLink not available, using fallback');
+            // Fallback: try to use window.open as last resort
+            window.open(adminUrl, '_blank');
+            window.showNotification('Opened admin panel (fallback method)', 'success');
+            return;
+          }
+          
+          // Open in default browser using Electron's shell
+          const result = await window.electronAPI.openExternalLink(adminUrl);
+          console.log('Result from openExternalLink:', result);
+          
+          if (result && result.success) {
+            // Show success notification
+            const scriptNames = {
+              pathwise: 'Pathwise RLO',
+              kawartha: 'Kawartha RDO',
+              sunshine: 'Sunshine RDO',
+              hubert: 'Hubert RDO',
+              assiniboine: 'Assiniboine',
+              coastal: 'Coastal RLO',
+              wealthone: 'WealthOne RDO',
+              vancity: 'Vancity',
+              keystonerdo: 'Keystone RDO',
+              keystonerdi: 'Keystone RDI',
+              parama: 'Parama RDI',
+              rocky: 'Rocky RDO'
+            };
+            
+            const scriptName = scriptNames[selectedScript] || selectedScript;
+            window.showNotification(`Opened ${scriptName} ${selectedEnvironment.toUpperCase()} admin panel in browser`, 'success');
+          } else {
+            console.error('Failed to open external link:', result ? result.error : 'Unknown error');
+            // Try fallback method
+            console.log('Trying fallback method...');
+            window.open(adminUrl, '_blank');
+            window.showNotification('Opened admin panel (fallback method)', 'success');
+          }
+        } catch (error) {
+          console.error('Error opening admin panel:', error);
+          // Try fallback method
+          try {
+            console.log('Trying fallback method due to error...');
+            window.open(adminUrl, '_blank');
+            window.showNotification('Opened admin panel (fallback method)', 'success');
+          } catch (fallbackError) {
+            console.error('Fallback method also failed:', fallbackError);
+            window.showNotification(`Error opening admin panel: ${error.message}`, 'error');
+          }
+        }
+      } else {
+        // Show error if admin URL not available
+        console.log('Admin URL not found for:', selectedScript, selectedEnvironment);
+        window.showNotification('Admin panel not available for this tenant/environment', 'warning');
+      }
+    }
+
+    const motivationalQuotes = [
+      { quote: "Quality is not an act, it is a habit.", author: "Aristotle" },
+      { quote: "The bitterness of poor quality remains long after the sweetness of low price is forgotten.", author: "Benjamin Franklin" },
+      { quote: "Testing shows the presence, not the absence of bugs.", author: "Edsger W. Dijkstra" },
+      { quote: "The goal of a designer is to listen, observe, understand, sympathize, empathize, synthesize, and glean insights.", author: "Jon Kolko" },
+      { quote: "Quality means doing it right when no one is looking.", author: "Henry Ford" },
+      { quote: "It is not the strongest of the species that survives, but the one most adaptable to change.", author: "Charles Darwin" },
+      { quote: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+      { quote: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+      { quote: "First, solve the problem. Then, write the code.", author: "John Johnson" },
+      { quote: "The most damaging phrase in the language is: 'We've always done it this way!'", author: "Grace Hopper" },
+      { quote: "Continuous improvement is better than delayed perfection.", author: "Mark Twain" },
+      { quote: "The user's perception is the only reality that matters.", author: "Unknown" }
+    ];
+
+    // Function to get random quote
+    function getRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * motivationalQuotes.length);
+      return motivationalQuotes[randomIndex];
+    }
+
+    // Function to update motivation quote
+    function updateMotivationQuote() {
+      const quote = getRandomQuote();
+      document.getElementById('motivationQuote').textContent = quote.quote;
+      document.getElementById('motivationAuthor').textContent = `- ${quote.author}`;
+    }
+
+    // Global toggle function for collapsible sections
+    function toggleSection(contentId) {
+      const content = document.getElementById(contentId);
+      const header = content.previousElementSibling;
+      
+      content.classList.toggle('active');
+      header.classList.toggle('active');
+    }
+
+    // Theme toggle functionality
+    function initThemeToggle() {
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const html = document.documentElement;
+      
+      // Check for saved theme preference or default to light
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      html.setAttribute('data-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+      
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        // Show notification
+        window.showNotification(`Switched to ${newTheme} theme`, 'success');
+      });
+    }
+
+    function updateThemeIcon(theme) {
+      const themeIcon = document.getElementById('themeIcon');
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+
+    // Modal functionality
+    function openReportModal() {
+      const modal = document.getElementById('reportModal');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeReportModal() {
+      const modal = document.getElementById('reportModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Parallel batch execution functionality
+    let batchQueue = [];
+    let isBatchRunning = false;
+    let batchStats = { total: 0, running: 0, completed: 0, failed: 0 };
+
+    function openBatchModal() {
+      const modal = document.getElementById('batchModal');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      updateBatchQueueDisplay();
+    }
+
+    function closeBatchModal() {
+      const modal = document.getElementById('batchModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    function getCurrentConfiguration() {
+      return {
+        scriptKey: document.getElementById('scriptSelect').value,
+        environment: document.getElementById('envSelect').value,
+        mainUser: document.getElementById('mainUserSelect').value,
+        mainEmail: document.getElementById('mainEmail').value,
+        mainCell: document.getElementById('mainCell').value,
+        executionMode: document.getElementById('executionMode').value,
+        submitApplication: document.getElementById('submitApplication').value,
+        addJoint: document.getElementById('addJointSelect').value,
+        jointUser: document.getElementById('jointUserSelect').value,
+        jointEmail: document.getElementById('jointEmail').value,
+        jointCell: document.getElementById('jointCell').value,
+        openAnotherAccount: document.getElementById('openAnotherAccount').value,
+        selectOverdraft: document.getElementById('selectOverdraft') ? document.getElementById('selectOverdraft').value : 
+                         document.getElementById('selectOverdraftKeystone') ? document.getElementById('selectOverdraftKeystone').value : 
+                         document.getElementById('selectOverdraftKeystoneRDI') ? document.getElementById('selectOverdraftKeystoneRDI').value : null,
+        selectDebitCard: document.getElementById('selectDebitCard') ? document.getElementById('selectDebitCard').value : null,
+        selectAccount: document.getElementById('selectAccount') ? document.getElementById('selectAccount').value : null,
+        addPowerOfAttorney: document.getElementById('addPowerOfAttorney') ? document.getElementById('addPowerOfAttorney').value : null,
+        powerUser: document.getElementById('powerUserSelect') ? document.getElementById('powerUserSelect').value : null,
+        powerEmail: document.getElementById('powerEmail') ? document.getElementById('powerEmail').value : null,
+        powerCell: document.getElementById('powerCell') ? document.getElementById('powerCell').value : null,
+        selectThirdpartyOptions: document.getElementById('selectThirdpartyOptions') ? document.getElementById('selectThirdpartyOptions').value : null,
+        thirdpartyBusiness: document.getElementById('thirdpartyBusiness') ? document.getElementById('thirdpartyBusiness').value : null,
+        thirdpartyIndividual: document.getElementById('thirdpartyIndividual') ? document.getElementById('thirdpartyIndividual').value : null
+      };
+    }
+
+    function updateCurrentConfigDisplay() {
+      const config = getCurrentConfiguration();
+      const scriptNames = {
+        pathwise: 'Pathwise RLO',
+        kawartha: 'Kawartha RDO',
+        sunshine: 'Sunshine RDO',
+        hubert: 'Hubert RDO',
+        assiniboine: 'Assiniboine',
+        coastal: 'Coastal RLO',
+        wealthone: 'WealthOne RDO',
+        vancity: 'Vancity',
+        keystonerdo: 'Keystone RDO',
+        keystonerdi: 'Keystone RDI',
+        parama: 'Parama RDI',
+        rocky: 'Rocky RDO'
+      };
+
+      const display = document.getElementById('currentConfigDisplay');
+      display.innerHTML = `
+        <strong>Script:</strong> ${scriptNames[config.scriptKey] || config.scriptKey}<br>
+        <strong>Environment:</strong> ${config.environment.toUpperCase()}<br>
+        <strong>User:</strong> ${config.mainUser}<br>
+        <strong>Email:</strong> ${config.mainEmail}
+      `;
+    }
+
+    function addToBatch() {
+      const config = getCurrentConfiguration();
+      
+      // Validate required fields
+      if (!config.mainEmail) {
+        window.showNotification('Please enter main user email', 'error');
+        return;
+      }
+      if (!config.mainCell) {
+        window.showNotification('Please enter main user cell phone', 'error');
+        return;
+      }
+
+      // Add timestamp and ID
+      config.id = Date.now();
+      config.addedAt = new Date().toLocaleTimeString();
+      config.status = 'pending';
+      
+      batchQueue.push(config);
+      updateBatchQueueDisplay();
+      window.showNotification('Configuration added to parallel batch!', 'success');
+    }
+
+    function updateBatchQueueDisplay() {
+      const queueDisplay = document.getElementById('batchQueue');
+      const batchCount = document.getElementById('batchCount');
+      const startButton = document.getElementById('startBatch');
+
+      batchCount.textContent = batchQueue.length;
+      startButton.disabled = batchQueue.length === 0;
+
+      if (batchQueue.length === 0) {
+        queueDisplay.innerHTML = '<div style="color: var(--text-secondary); font-style: italic;">No tests in queue. Add configurations above.</div>';
+        return;
+      }
+
+      const scriptNames = {
+        pathwise: 'Pathwise RLO',
+        kawartha: 'Kawartha RDO',
+        sunshine: 'Sunshine RDO',
+        hubert: 'Hubert RDO',
+        assiniboine: 'Assiniboine',
+        coastal: 'Coastal RLO',
+        wealthone: 'WealthOne RDO',
+        vancity: 'Vancity',
+        keystonerdo: 'Keystone RDO',
+        keystonerdi: 'Keystone RDI',
+        parama: 'Parama RDI',
+        rocky: 'Rocky RDO'
+      };
+
+      queueDisplay.innerHTML = batchQueue.map((config, index) => {
+        const statusIcon = config.status === 'completed' ? '✅' : 
+                          config.status === 'running' ? '🔄' : 
+                          config.status === 'failed' ? '❌' : '⏳';
+        
+        // Build additional info based on configuration
+        let additionalInfo = [];
+        
+        // Add joint applicant info if applicable
+        if (config.addJoint === 'Yes' && config.jointUser) {
+          additionalInfo.push(`Joint: ${config.jointUser}`);
+        }
+        
+        // Add account options based on script type
+        if (config.scriptKey === 'hubert' && config.openAnotherAccount) {
+          additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+        }
+        
+        if (config.scriptKey === 'assiniboine') {
+          if (config.openAnotherAccount) additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+          if (config.selectOverdraft) additionalInfo.push(`Overdraft: ${config.selectOverdraft}`);
+          if (config.selectDebitCard) additionalInfo.push(`Debit Card: ${config.selectDebitCard}`);
+        }
+        
+        if (config.scriptKey === 'wealthone' && config.openAnotherAccount) {
+          additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+        }
+        
+        if (config.scriptKey === 'vancity' && config.selectAccount) {
+          additionalInfo.push(`Account: ${config.selectAccount}`);
+        }
+        
+        if (config.scriptKey === 'keystonerdo') {
+          if (config.openAnotherAccount) additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+          if (config.selectOverdraft || config.selectOverdraftKeystone) {
+            const overdraft = config.selectOverdraft || config.selectOverdraftKeystone;
+            additionalInfo.push(`Overdraft: ${overdraft}`);
+          }
+        }
+        
+        if (config.scriptKey === 'keystonerdi') {
+          if (config.addPowerOfAttorney === 'Yes' && config.powerUser) {
+            additionalInfo.push(`Power of Attorney: ${config.powerUser}`);
+          }
+          if (config.selectThirdpartyOptions && config.selectThirdpartyOptions !== 'No') {
+            additionalInfo.push(`Third Party: ${config.selectThirdpartyOptions}`);
+          }
+          if (config.openAnotherAccount) additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+          if (config.selectOverdraftKeystoneRDI) additionalInfo.push(`Overdraft: ${config.selectOverdraftKeystoneRDI}`);
+        }
+        
+        if ((config.scriptKey === 'rocky' || config.scriptKey === 'kawartha' || config.scriptKey === 'sunshine') && config.openAnotherAccount) {
+          additionalInfo.push(`Another Account: ${config.openAnotherAccount}`);
+        }
+        
+        // Add submit application status for all tenants
+        if (config.submitApplication) {
+          additionalInfo.push(`Submit: ${config.submitApplication}`);
+        }
+        
+        // Create the info line
+        const infoLine = `${config.environment.toUpperCase()} | ${config.mainUser}${additionalInfo.length > 0 ? ' | ' + additionalInfo.join(' | ') : ''}`;
+        
+        return `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 0.5rem; background: ${config.status === 'running' ? 'rgba(37, 99, 235, 0.1)' : 'transparent'};">
+            <div>
+              <strong>${index + 1}. ${scriptNames[config.scriptKey]}</strong><br>
+              <small>${infoLine}</small>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>${statusIcon}</span>
+              <button onclick="removeBatchItem(${config.id})" style="background: none; border: none; color: var(--error-color); cursor: pointer; padding: 0.25rem;" ${isBatchRunning ? 'disabled' : ''}>🗑️</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateBatchStats() {
+      // Function removed - stats no longer needed
+    }
+
+    function updateTestStatusGrid() {
+      // Function removed - test status grid no longer needed
+    }
+
+    function removeBatchItem(id) {
+      if (isBatchRunning) {
+        window.showNotification('Cannot remove items while batch is running', 'warning');
+        return;
+      }
+      batchQueue = batchQueue.filter(item => item.id !== id);
+      updateBatchQueueDisplay();
+      window.showNotification('Item removed from batch', 'success');
+    }
+
+    function clearBatch() {
+      if (isBatchRunning) {
+        window.showNotification('Cannot clear batch while running', 'warning');
+        return;
+      }
+      batchQueue = [];
+      updateBatchQueueDisplay();
+      window.showNotification('Batch queue cleared', 'success');
+    }
+
+    async function startParallelBatchExecution() {
+      if (batchQueue.length === 0) return;
+
+      isBatchRunning = true;
+      
+      // Update UI
+      document.getElementById('startBatch').disabled = true;
+      document.getElementById('clearBatch').disabled = true;
+      document.getElementById('batchProgress').classList.remove('hidden');
+      
+      // Hide regular run controls and show batch controls
+      document.getElementById('runTest').disabled = true;
+      document.getElementById('batchRun').disabled = true;
+      document.getElementById('pauseTest').classList.remove('hidden');
+      document.getElementById('stopTest').classList.remove('hidden');
+
+      // Mark all tests as running initially
+      batchQueue.forEach(config => {
+        config.status = 'running';
+      });
+
+      updateBatchQueueDisplay();
+
+      window.showNotification(`Starting parallel execution of ${batchQueue.length} tests...`, 'success');
+      window.updateStatusIndicator('running', 'Running Parallel Batch...');
+
+      const output = document.getElementById('output');
+      output.textContent = `=== PARALLEL BATCH EXECUTION STARTED ===\nTotal tests: ${batchQueue.length}\nStarted at: ${new Date().toLocaleString()}\nMode: All tests running simultaneously\n\n`;
+      output.scrollTop = output.scrollHeight;
+
+      document.getElementById('batchStatus').textContent = `Running ${batchQueue.length} tests in parallel...`;
+
+      try {
+        // Start parallel execution using new IPC method
+        const result = await window.electronAPI.runPlaywrightBatch(batchQueue);
+        
+        // Update individual test statuses based on results
+        result.results.forEach((testResult, index) => {
+          if (index < batchQueue.length) {
+            batchQueue[index].status = testResult.status;
+          }
+        });
+
+        updateBatchQueueDisplay();
+
+        output.textContent += `\n=== PARALLEL BATCH EXECUTION COMPLETED ===\n`;
+        output.textContent += `Total Tests: ${result.total}\n`;
+        output.textContent += `Completed: ${result.completed}\n`;
+        output.textContent += `Failed: ${result.failed}\n`;
+        output.textContent += `Stopped: ${result.stopped}\n`;
+        output.textContent += `Finished at: ${new Date().toLocaleString()}\n\n`;
+
+        // Add detailed results
+        result.results.forEach((testResult, index) => {
+          output.textContent += `--- Test ${testResult.index} Results ---\n`;
+          output.textContent += `Status: ${testResult.status.toUpperCase()}\n`;
+          output.textContent += `${testResult.message}\n\n`;
+        });
+
+        output.scrollTop = output.scrollHeight;
+
+        if (result.completed === result.total) {
+          window.showNotification(`All ${result.total} tests completed successfully!`, 'success');
+          window.updateStatusIndicator('completed', 'Parallel Batch Completed');
+        } else {
+          window.showNotification(`Parallel batch finished: ${result.completed}/${result.total} successful`, 'warning');
+          window.updateStatusIndicator('completed', 'Parallel Batch Completed');
+        }
+
+        document.getElementById('batchStatus').textContent = `Parallel execution completed: ${result.completed}/${result.total} successful`;
+
+      } catch (error) {
+        console.error('Parallel batch execution error:', error);
+        output.textContent += `\n=== PARALLEL BATCH EXECUTION FAILED ===\n`;
+        output.textContent += `Error: ${error}\n`;
+        output.textContent += `Failed at: ${new Date().toLocaleString()}\n`;
+        output.scrollTop = output.scrollHeight;
+
+        window.showNotification('Parallel batch execution failed!', 'error');
+        window.updateStatusIndicator('error', 'Parallel Batch Failed');
+        document.getElementById('batchStatus').textContent = 'Parallel execution failed';
+      }
+
+      // Reset UI
+      isBatchRunning = false;
+      resetBatchUI();
+    }
+
+    function resetBatchUI() {
+      document.getElementById('startBatch').disabled = batchQueue.length === 0;
+      document.getElementById('clearBatch').disabled = false;
+      document.getElementById('runTest').disabled = false;
+      document.getElementById('batchRun').disabled = false;
+      document.getElementById('pauseTest').classList.add('hidden');
+      document.getElementById('stopTest').classList.add('hidden');
+    }
+
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+      const reportModal = document.getElementById('reportModal');
+      const batchModal = document.getElementById('batchModal');
+      
+      if (event.target === reportModal) {
+        closeReportModal();
+      }
+      
+      if (event.target === batchModal) {
+        closeBatchModal();
+      }
+    });
+
+    // Status indicator functions
+    window.updateStatusIndicator = function(status, text) {
+      const indicator = document.getElementById('statusIndicator');
+      const statusText = document.getElementById('statusText');
+      
+      if (indicator && statusText) {
+        // Remove all status classes
+        indicator.className = 'status-indicator';
+        // Add new status class
+        indicator.classList.add(status);
+        // Update text
+        statusText.textContent = text;
+      }
+    };
+
+    // Toast notification function
+    window.showNotification = function(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      if (notification) {
+        notification.textContent = message;
+        notification.className = `notification ${type} show`;
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    };
+
+    // Override showStatus to use toast notifications instead of status box
+    window.showStatus = function(message, type) {
+      // Show toast notification
+      window.showNotification(message, type);
+      
+      // Still update the status element for backward compatibility (but keep it hidden)
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = message;
+        status.className = `status ${type}`;
+        // Keep it hidden - we're using toast now
+        status.classList.add('hidden');
+      }
+    };
+
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Initialize motivation
+      updateMotivationQuote();
+      
+      // Add event listeners for refresh button
+      document.getElementById('refreshMotivation').addEventListener('click', function() {
+        updateMotivationQuote();
+        window.showNotification('New motivation loaded!', 'success');
+      });
+      
+      // Get all elements
+      const scriptSelect = document.getElementById('scriptSelect');
+      const envSelect = document.getElementById('envSelect');
+      const mainUserSelect = document.getElementById('mainUserSelect');
+      
+      // Get all sections
+      const jointSection = document.getElementById('jointSection');
+      const powerSection = document.getElementById('powerSection');
+      const thirdpartySection = document.getElementById('thirdpartySection');
+      const accountOptionsSection = document.getElementById('accountOptionsSection');
+      
+      // Sub-sections within account options
+      const assiniboineOptions = document.getElementById('assiniboineOptions');
+      const vancityOptions = document.getElementById('vancityOptions');
+      const keystoneOptions = document.getElementById('keystoneOptions');
+      const keystoneRDIOptions = document.getElementById('keystoneRDIOptions');
+      
+      // Third party elements
+      const selectThirdpartyOptions = document.getElementById('selectThirdpartyOptions');
+      const thirdpartyBusinessGroup = document.getElementById('thirdpartyBusinessGroup');
+      const thirdpartyIndividualGroup = document.getElementById('thirdpartyIndividualGroup');
+
+      function updateMainUserOptions(selectedScript) {
+        // Clear existing options
+        mainUserSelect.innerHTML = '';
+        
+        // Get users from online configuration
+        let users = userConfig[selectedScript] || defaultUserConfig[selectedScript] || ['Pearl', 'Chrit'];
+        
+        // Add main user options
+        users.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user;
+          option.textContent = user;
+          mainUserSelect.appendChild(option);
+        });
+
+        // Update joint user options with the SAME users
+        updateJointUserOptions(users);
+      }
+
+      function updateJointUserOptions(users) {
+        const jointUserSelect = document.getElementById('jointUserSelect');
+        if (jointUserSelect) {
+          // Clear existing options
+          jointUserSelect.innerHTML = '';
+          
+          // Add the same user options as main users
+          users.forEach(user => {
+            const option = document.createElement('option');
+            option.value = user;
+            option.textContent = user;
+            jointUserSelect.appendChild(option);
+          });
+        }
+      }
+
+      function hideAllSections() {
+        jointSection.classList.add('hidden');
+        powerSection.classList.add('hidden');
+        thirdpartySection.classList.add('hidden');
+        accountOptionsSection.classList.add('hidden');
+        
+        // Hide sub-sections within account options
+        assiniboineOptions.classList.add('hidden');
+        vancityOptions.classList.add('hidden');
+        keystoneOptions.classList.add('hidden');
+        keystoneRDIOptions.classList.add('hidden');
+      }
+
+      function updateFormBasedOnScript() {
+        const selectedScript = scriptSelect.value;
+        
+        // Update main user options
+        updateMainUserOptions(selectedScript);
+        
+        // Hide all sections first
+        hideAllSections();
+        
+        // Show sections based on selected script
+        switch(selectedScript) {
+          case 'pathwise':
+          case 'coastal':
+            // Only basic options (email, cell)
+            break;
+            
+          case 'hubert':
+            accountOptionsSection.classList.remove('hidden');
+            break;
+            
+          case 'assiniboine':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            assiniboineOptions.classList.remove('hidden');
+            break;
+            
+          case 'wealthone':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            break;
+            
+          case 'vancity':
+            accountOptionsSection.classList.remove('hidden');
+            vancityOptions.classList.remove('hidden');
+            break;
+            
+          case 'keystonerdo':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            keystoneOptions.classList.remove('hidden');
+            break;
+            
+          case 'keystonerdi':
+            powerSection.classList.remove('hidden');
+            thirdpartySection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            keystoneRDIOptions.classList.remove('hidden');
+            break;
+            
+          case 'parama':
+            // Only basic options
+            break;
+            
+          case 'rocky':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            break;
+            
+          case 'kawartha':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            break;
+            
+          case 'sunshine':
+            jointSection.classList.remove('hidden');
+            accountOptionsSection.classList.remove('hidden');
+            break;
+            
+          default:
+            // Show basic options only
+        }
+      }
+
+      // Handle third party options change for Keystone RDI
+      if (selectThirdpartyOptions) {
+        selectThirdpartyOptions.addEventListener('change', function() {
+          const selectedValue = this.value;
+          
+          if (selectedValue === 'Yes, on behalf of a business') {
+            thirdpartyBusinessGroup.classList.remove('hidden');
+            thirdpartyIndividualGroup.classList.add('hidden');
+          } else if (selectedValue === 'Yes, on behalf of an individual') {
+            thirdpartyBusinessGroup.classList.add('hidden');
+            thirdpartyIndividualGroup.classList.remove('hidden');
+          } else {
+            thirdpartyBusinessGroup.classList.add('hidden');
+            thirdpartyIndividualGroup.classList.add('hidden');
+          }
+        });
+      }
+
+      // Add event listener for script selection
+      if (scriptSelect) {
+        scriptSelect.addEventListener('change', function() {
+          updateFormBasedOnScript();
+        });
+        
+        // Initial setup
+        updateFormBasedOnScript();
+      }
+
+      // Add event listener for environment selection
+      if (envSelect) {
+        envSelect.addEventListener('change', function() {
+          updateAdminPanelButton();
+        });
+        
+        // Initial setup
+        updateAdminPanelButton();
+      }
+
+      // Initialize user configuration loading
+      loadUserConfiguration().then(() => {
+        // After user config is loaded, initialize the form
+        updateFormBasedOnScript();
+      });
+      
+      // Initialize status indicator
+      window.updateStatusIndicator('ready', 'Ready');
+      
+      // Initialize theme toggle
+      initThemeToggle();
+      
+      // Add copy output functionality
+      const copyOutputButton = document.getElementById('copyOutput');
+      if (copyOutputButton) {
+        copyOutputButton.addEventListener('click', function() {
+          const output = document.getElementById('output');
+          if (output) {
+            const outputText = output.textContent;
+            if (outputText.trim() === '') {
+              window.showNotification('No output to copy', 'warning');
+              return;
+            }
+            
+            // Use the modern Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+              navigator.clipboard.writeText(outputText).then(() => {
+                window.showNotification('Output copied to clipboard!', 'success');
+              }).catch(err => {
+                console.error('Failed to copy: ', err);
+                fallbackCopyToClipboard(outputText);
+              });
+            } else {
+              // Fallback for older browsers or non-secure contexts
+              fallbackCopyToClipboard(outputText);
+            }
+          }
+        });
+      }
+
+      // Fallback copy function for older browsers
+      function fallbackCopyToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            window.showNotification('Output copied to clipboard!', 'success');
+          } else {
+            window.showNotification('Failed to copy output', 'error');
+          }
+        } catch (err) {
+          console.error('Fallback copy failed: ', err);
+          window.showNotification('Copy not supported by browser', 'error');
+        }
+        
+        document.body.removeChild(textArea);
+      }
+
+      // Add clear output functionality
+      const clearOutputButton = document.getElementById('clearOutput');
+      if (clearOutputButton) {
+        clearOutputButton.addEventListener('click', function() {
+          const output = document.getElementById('output');
+          if (output) {
+            output.textContent = '';
+            window.showNotification('Output cleared', 'success');
+          }
+        });
+      }
+
+      // Add parallel batch run functionality
+      const batchRunButton = document.getElementById('batchRun');
+      if (batchRunButton) {
+        batchRunButton.addEventListener('click', function() {
+          openBatchModal();
+        });
+      }
+
+      // Add current config to batch from main panel
+      const addToBatchFromMainButton = document.getElementById('addToBatchFromMain');
+      if (addToBatchFromMainButton) {
+        addToBatchFromMainButton.addEventListener('click', function() {
+          const config = getCurrentConfiguration();
+          
+          // Validate required fields
+          if (!config.mainEmail) {
+            window.showNotification('Please enter main user email', 'error');
+            return;
+          }
+          if (!config.mainCell) {
+            window.showNotification('Please enter main user cell phone', 'error');
+            return;
+          }
+
+          // Keystone RDI specific validation
+          if (config.scriptKey === 'keystonerdi') {
+            if (config.addPowerOfAttorney === 'Yes') {
+              if (!config.powerEmail) {
+                window.showNotification('Please enter Power of Attorney email', 'error');
+                return;
+              }
+              if (!config.powerCell) {
+                window.showNotification('Please enter Power of Attorney cell phone', 'error');
+                return;
+              }
+            }
+          }
+
+          // Add timestamp and ID
+          config.id = Date.now();
+          config.addedAt = new Date().toLocaleTimeString();
+          config.status = 'pending';
+          
+          batchQueue.push(config);
+          
+          // Get script name for display
+          const scriptNames = {
+            pathwise: 'Pathwise RLO',
+            kawartha: 'Kawartha RDO',
+            sunshine: 'Sunshine RDO',
+            hubert: 'Hubert RDO',
+            assiniboine: 'Assiniboine',
+            coastal: 'Coastal RLO',
+            wealthone: 'WealthOne RDO',
+            vancity: 'Vancity',
+            keystonerdo: 'Keystone RDO',
+            keystonerdi: 'Keystone RDI',
+            parama: 'Parama RDI',
+            rocky: 'Rocky RDO'
+          };
+          
+          const scriptName = scriptNames[config.scriptKey] || config.scriptKey;
+          window.showNotification(`${scriptName} added to parallel batch! (${batchQueue.length} total)`, 'success');
+        });
+      }
+
+      // Batch modal event listeners
+      const clearBatchButton = document.getElementById('clearBatch');
+      if (clearBatchButton) {
+        clearBatchButton.addEventListener('click', clearBatch);
+      }
+
+      const startBatchButton = document.getElementById('startBatch');
+      if (startBatchButton) {
+        startBatchButton.addEventListener('click', startParallelBatchExecution);
+      }
+
+      // Add report issue functionality
+      const reportIssueButton = document.getElementById('reportIssue');
+      if (reportIssueButton) {
+        reportIssueButton.addEventListener('click', function() {
+          openReportModal();
+        });
+      }
+
+      // Add admin panel functionality
+      const openAdminButton = document.getElementById('openAdminLink');
+      if (openAdminButton) {
+        openAdminButton.addEventListener('click', function() {
+          openAdminPanel();
+        });
+      }
+
+      // Add workflows functionality
+      const openWorkflowsButton = document.getElementById('openWorkflowsLink');
+      if (openWorkflowsButton) {
+        openWorkflowsButton.addEventListener('click', function() {
+          openWorkflows();
+        });
+      }
+    });
+  </script>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
