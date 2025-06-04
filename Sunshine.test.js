@@ -141,6 +141,7 @@ const Data = {
   accountOptions: {
     accountTypes: ['Chequing', 'Savings', 'Term Deposit'],
     addJointApplicant: ['Yes', 'No'],
+    submissionStatus: ['Yes', 'No'],
     chequingPackages: ['Core', 'Mobile Unlimited', 'Premium Unlimited'],
     savingsPackages: ['Elevate High Interest Savings Account', 'Savings Account'],
     termdepositPackages: ['1 Year Non-Redeemable Term Deposit', '2 Year Non-Redeemable Term Deposit', '5 Year Non-Redeemable Term Deposit'],
@@ -231,7 +232,8 @@ const jointUserCell = '6478543394';
 // ⚙️ Select Options
 // Open Another Account?
 const selectAddAnotherAccount = Data.accountOptions.addAnotherAccount[0]; // 0 = Yes, 1 = No
-
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 
@@ -677,9 +679,17 @@ test('Sunshine_RDO', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Next' }).click();
   }
-  await new Promise(() => { });
-  // Last submit
-  // await page.getByRole('button', { name: 'Submit' }).click();
+  
+    // ---------- confirmation page
+
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
   
 });
 

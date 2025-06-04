@@ -199,6 +199,7 @@ const Data = {
         savingsPackages: ['Everyday Chequing 1', 'Everyday Chequing 2', 'RDI Savings'],
         intendedUses: ['Household Income/Expenses', 'Income - Other', 'Income - Payroll & Pension', 'Income - Rental'],
         openAnotherAccount: ['Yes', 'No'],
+        submissionStatus: ['Yes', 'No'],
         addJointApplicant: ['Yes', 'No'],
         overdraft: ['Yes', 'No']
     }
@@ -242,7 +243,8 @@ const jointUserCell = '6478543394';
 // Open Another Account?
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
 const selectOverdraft = Data.accountOptions.overdraft[0]; // 0 = Yes, 1 = No
-
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 // ===========================
@@ -573,9 +575,16 @@ test('Keystone_RDO', async ({ page }) => {
 
     }
 
-await new Promise(() => { });
-    // ---------- confirmation page
-    // await page.getByRole('button', { name: 'Submit' }).click();
+  // ---------- confirmation page
+
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
     
 
 

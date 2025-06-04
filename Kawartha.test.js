@@ -148,6 +148,7 @@ const Data = {
     howHeard: ['Social Media', 'Search Engine (Google, Safari, Bing, etc.)', 'Word of Mouth', 'Online Forum', 'Print/Digital Media', 'Referral', 'Other'],
     openAnotherAccount: ['Yes', 'No'],
     addJointApplicant: ['Yes', 'No'],
+    submissionStatus: ['Yes', 'No'],
     overDraft: ['Yes', 'No'],
     card: ['Debit Mastercard', 'Debit card']
   }
@@ -193,6 +194,8 @@ const jointUserCell = '6478543394';
 // ⚙️ Select Options
 // Open Another Account?
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 
@@ -859,10 +862,20 @@ test('Kawartha_RDO', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Next' }).click();
 
-    await new Promise(() => { });
 
 
   }
+
+    // ---------- confirmation page
+
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
 
 
   // -- confirmation

@@ -120,6 +120,7 @@ const Data = {
         savingsPackages: ['Hubert Savings'],
         intendedUses: ['Housegold expenses', 'Education', 'Salary or direct deposit', 'General savings', 'Special purchase', 'Long Term Savings'],
         openAnotherAccount: ['Yes', 'No'],
+        submissionStatus: ['Yes', 'No'],
         addJointApplicant: ['Yes', 'No'],
     }
 };
@@ -154,6 +155,8 @@ const mainUserCell = '6478543392';
 // ⚙️ Select Options
 // Open Another Account?
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 
@@ -377,11 +380,18 @@ test('Hubert_RDO', async ({ page }) => {
 
 
     await page.getByRole('button', { name: 'Next' }).click();
-await new Promise(() => {}); // waits forever
 
 
-    // ---------- confirmation page
-    // await page.getByRole('button', { name: 'Submit' }).click();
+      // ---------- confirmation page
+
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
     
 
 

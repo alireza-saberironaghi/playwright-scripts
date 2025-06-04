@@ -47,6 +47,7 @@ const Data = {
     overdraft: ['Yes', 'No'],
     debitCard: ['Yes', 'No'],
     openAnotherAccount: ['Yes', 'No'],
+    submissionStatus: ['Yes', 'No'],
     addJointApplicant: ['Yes', 'No'],
   }
 };
@@ -102,6 +103,8 @@ const selectedAddAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 
 const selectedOverdraft = Data.accountOptions.overdraft[0]; // 0 = Yes, 1 = No
 // Select Debit Card
 const selectedDebitCard = Data.accountOptions.debitCard[0]; // 0 = Yes, 1 = No
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 
@@ -367,13 +370,21 @@ test('Assiniboine', async ({ page }) => {
     await page.locator('div').filter({ hasText: /^empty$/ }).click();
     await page.getByRole('option', { name: jointUser.usPerson, exact: true }).click();
     await page.getByRole('button', { name: 'Next' }).click();
-    await new Promise(() => { });
 
 
   }
 
 
+    // ---------- confirmation page
 
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
 
 
 

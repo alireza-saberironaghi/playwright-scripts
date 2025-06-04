@@ -239,6 +239,7 @@ const Data = {
     intendedUses: ['Family & Household Income/Expenses', 'Pension Income', 'Rental Property Income/Expenses', 'Travel/Vacation', 'Education', 'Renovations', 'Car Purchase/Expenses', 'Taxes'],
     intendedUses2: ['Retirement', 'Investment', 'Savings'],
     openAnotherAccount: ['Yes', 'No'],
+    submissionStatus: ['Yes', 'No'],
     addJointApplicant: ['Yes', 'No']
   }
 };
@@ -297,7 +298,8 @@ const jointUserCell = '6478543394';
 // ⚙️ Select Options
 // Open Another Account?
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[1]; // 0 = Yes, 1 = No
-
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 // ===========================
 //      END OF SETTINGS
@@ -693,12 +695,20 @@ test('WealthOne_RDO', async ({ page }) => {
       // await page.getByLabel(, { exact: true }).first().click();
       await page.getByRole('option', { name: selectedJointUser.politicallyExposed }).click();
       await page.getByRole('button', { name: 'Next' }).click();
-      await new Promise(() => { });
 
     }
   }
 
+    // ---------- confirmation page
 
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
 
   // ----------------------- confirmation page
   // await page.getByRole('button', { name: 'Submit' }).click();

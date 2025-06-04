@@ -479,6 +479,7 @@ const Data = {
   },
   housingStatuses: ['Rent', 'Own', 'Lives with Parents', 'Other'],
   mailingAddresses: ['Yes', 'No'],
+  submissionStatus: ['Yes', 'No'],
   livedHereMoreThan24Months: ['Yes', 'No'],
   otpCode: '000000'
 };
@@ -507,6 +508,8 @@ const selectedUser = Data.users.find(user => user.name === 'Pearl'); // ['Pearl'
 const mainUserEmail = 'alex.saberi@thirdstream.ca';
 const mainUserCell = '6478543392';
 
+// Submit Application?
+const selectSubmissionStatus = Data.submissionStatus[0]; // 0 = Yes, 1 = No
 
 // ===========================
 //      END OF SETTINGS
@@ -698,8 +701,19 @@ test('Coastal_RLO', async ({ page }) => {
 
   // Confirmation Page
   await page.locator('p-checkbox div').nth(2).click();
-  // await page.getByRole('button', { name: 'SUBMIT' }).click();
-  await new Promise(() => { });
+
+
+    // ---------- confirmation page
+
+
+    if (selectSubmissionStatus === 'Yes') {
+        await page.getByRole('button', { name: 'Submit' }).click();
+
+        await new Promise(() => { });
+    } else {
+        await new Promise(() => { });
+    }
+
 });
 
 

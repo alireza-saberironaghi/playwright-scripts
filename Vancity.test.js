@@ -33,6 +33,7 @@ const Data = {
   accountOptions: {
     intendedUses: ['Household Income/Expenses', 'Income - Other', 'Income - Payroll & Pension', 'Income - Rental', 'Savings', 'Collateral', 'Savings - Education', 'Savings - Home Improvement', 'Savings Home/Asset purchase'],
     howHeard: ['Social Media', 'Search Engine (Google, Safari, bing, etc.)', 'Word of Mouth', 'Online Forum', 'Print/Digital Media', 'Referral', 'Other'],
+    submissionStatus: ['Yes', 'No'],
     apply: ['Apply only for a', 'Apply for both accounts']
   }
 };
@@ -67,7 +68,8 @@ const mainUserCell = '6478543392';
 
 // ⚙️ Select Options
 const selectedAccount = Data.accounts[0]; // 0 = Essential Chequing, 1 = Essential Plus Chequing, 2 = Jumpstart High Interest Savings, 3 = Pay As You Go Chequing, 4 = Total Chequing
-
+// Submit Application?
+const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 
 
 // ===========================
@@ -216,9 +218,14 @@ test('Vancity_RDO', async ({ page }) => {
   await page.getByRole('button', { name: 'Next' }).click();
 
   // Confirmation screen
-  // await page.getByRole('button', { name: 'Submit' }).click();
-  // await page.getByRole('button', { name: 'I consent' }).click();
-  await new Promise(() => { });
+
+  if (selectSubmissionStatus === 'Yes') {
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByRole('button', { name: 'I consent' }).click();
+    await new Promise(() => { });
+  } else {
+    await new Promise(() => { });
+  }
 });
 
 function playwrightCore(testName) {
