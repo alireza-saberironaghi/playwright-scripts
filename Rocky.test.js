@@ -560,6 +560,9 @@ test('Rocky_RDO', async ({ page }) => {
 
         await page.getByRole('button', { name: 'Next' }).click();
 
+
+        await page.waitForTimeout(30 * 60 * 1000); // 30 minutes
+
     }
 
 
