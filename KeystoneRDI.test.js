@@ -574,7 +574,7 @@ test('Keystone_RDI', async ({ page }) => {
     const selectApplyoverdraft = Data.letsGetStartedPage.applyOverdraft[0]; // 0 = Yes, 1 = No
 
     // Submit Application?
-const selectSubmissionStatus = Data.applicationHubPage.submissionStatus[0]; // 0 = Yes, 1 = No
+const selectSubmissionStatus = Data.applicationHubPage.submissionStatus[1]; // 0 = Yes, 1 = No
 
 
 
@@ -1130,8 +1130,6 @@ const selectSubmissionStatus = Data.applicationHubPage.submissionStatus[0]; // 0
 
     // next button
     await page.getByRole('button', { name: 'Next' }).click();
-    // submit button
-    await page.getByRole('button', { name: 'Submit' }).waitFor();
 
  
 
