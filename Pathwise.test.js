@@ -507,7 +507,7 @@ const mainUserCell = '6478543392';
 // Submit Application?
 const selectSubmissionStatus = Data.submissionStatus[0]; // 0 = Yes, 1 = No
 // Pause Mode?
-const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
+const selectPauseMode = 'Active'; // 'Active' or 'Deactive'
 
 
 
