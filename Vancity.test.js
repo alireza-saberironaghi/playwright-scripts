@@ -222,6 +222,7 @@ test('Vancity_RDO', async ({ page }) => {
 
         if (selectSubmissionStatus === 'Yes') {
           await page.getByRole('button', { name: 'Submit' }).click();
+           await page.getByRole('button', { name: 'I consent' }).click();
           await expect(page.getByRole('heading', { name: 'Processing application...' })).toBeVisible({ timeout: 30000 });
           await page.waitForTimeout(3000);
   
