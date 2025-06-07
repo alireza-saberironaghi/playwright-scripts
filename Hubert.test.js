@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect} from '@playwright/test';
 import https from 'https';
 
 const Data = {
@@ -157,7 +157,8 @@ const mainUserCell = '6478543392';
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
 // Submit Application?
 const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
-
+// Pause Mode?
+const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
 
 
 // ===========================
@@ -385,13 +386,20 @@ test('Hubert_RDO', async ({ page }) => {
       // ---------- confirmation page
 
 
-    if (selectSubmissionStatus === 'Yes') {
-        await page.getByRole('button', { name: 'Submit' }).click();
-
-        await new Promise(() => { });
-    } else {
-        await new Promise(() => { });
-    }
+          if (selectSubmissionStatus === 'Yes') {
+            await page.getByRole('button', { name: 'Submit' }).click();
+            await expect(page.getByRole('heading', { name: 'Processing application...' })).toBeVisible({ timeout: 30000 });
+            await page.waitForTimeout(3000);
+    
+            if (selectPauseMode === 'Active') {
+                await new Promise(() => { });
+            }
+    
+        } else {
+            if (selectPauseMode === 'Active') {
+                await new Promise(() => { });
+            }
+        }
     
 
 

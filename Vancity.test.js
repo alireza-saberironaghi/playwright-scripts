@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect} from '@playwright/test';
 import https from 'https';
 
 // --------- Test Data Section ---------
@@ -70,7 +70,8 @@ const mainUserCell = '6478543392';
 const selectedAccount = Data.accounts[0]; // 0 = Essential Chequing, 1 = Essential Plus Chequing, 2 = Jumpstart High Interest Savings, 3 = Pay As You Go Chequing, 4 = Total Chequing
 // Submit Application?
 const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
-
+// Pause Mode?
+const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
 
 // ===========================
 //      END OF SETTINGS
@@ -219,13 +220,21 @@ test('Vancity_RDO', async ({ page }) => {
 
   // Confirmation screen
 
-  if (selectSubmissionStatus === 'Yes') {
-    await page.getByRole('button', { name: 'Submit' }).click();
-    await page.getByRole('button', { name: 'I consent' }).click();
-    await new Promise(() => { });
-  } else {
-    await new Promise(() => { });
-  }
+        if (selectSubmissionStatus === 'Yes') {
+          await page.getByRole('button', { name: 'Submit' }).click();
+          await expect(page.getByRole('heading', { name: 'Processing application...' })).toBeVisible({ timeout: 30000 });
+          await page.waitForTimeout(3000);
+  
+          if (selectPauseMode === 'Active') {
+              await new Promise(() => { });
+          }
+  
+      } else {
+          if (selectPauseMode === 'Active') {
+              await new Promise(() => { });
+          }
+      }
+
 });
 
 function playwrightCore(testName) {
