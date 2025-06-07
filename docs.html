@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto App Runner - User Documentation</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --error-color: #dc2626;
+            --background-color: #ffffff;
+            --surface-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-color);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .version {
+            font-size: 0.875rem;
+            opacity: 0.7;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+
+        .nav {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(248, 250, 252, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .subsection {
+            margin-bottom: 2.5rem;
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 0.1rem;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        }
+
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .code-block {
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-primary {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        .badge-success {
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .badge-error {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--error-color);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            background: var(--surface-color);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover {
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        .faq-item {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: var(--surface-color);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(180deg);
+        }
+
+        .faq-question::after {
+            content: '↓';
+            transition: transform 0.2s ease;
+        }
+
+        .screenshot {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            margin: 1.5rem 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--surface-color);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .footer {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            font-size: 1.2rem;
+        }
+
+        .toc {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .toc-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            border-radius: 0.25rem;
+            padding-left: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .toc-list a:hover {
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+            padding-left: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        @media print {
+            .nav, .footer {
+                display: none;
+            }
+
+            .header {
+                background: none !important;
+                color: var(--text-primary) !important;
+            }
+
+            .card, .highlight-box, .warning-box, .success-box {
+                box-shadow: none;
+                border: 1px solid var(--border-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>Auto App Runner</h1>
+                <div class="subtitle">User Documentation</div>
+                <div class="version">Version 1.0 • June 4, 2025</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <li><a href="#configuration">Configuration</a></li>
+                    <li><a href="#execution">Execution</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <div class="toc">
+                <div class="toc-title">📋 Table of Contents</div>
+                <ul class="toc-list">
+                    <li><a href="#overview">📖 Overview</a></li>
+                    <li><a href="#getting-started">🚀 Getting Started</a></li>
+                    <li><a href="#configuration">⚙️ Configuration Panel</a></li>
+                    <li><a href="#execution">▶️ Execution Control</a></li>
+                    <li><a href="#output">📄 Output Panel</a></li>
+                    <li><a href="#troubleshooting">🔧 Troubleshooting</a></li>
+                    <li><a href="#faq">❓ FAQ</a></li>
+                </ul>
+            </div>
+
+            <section id="overview" class="section">
+                <div class="section-header">
+                    <div class="section-icon">📖</div>
+                    <h2 class="section-title">Overview</h2>
+                </div>
+
+                <div class="card">
+                    <p>The Auto App Runner is an internal desktop application for Thirdstream that enables everyone - Business Analysts, Product Managers, QAs, and Developers - to automatically create applications across multiple tenants and environments. No technical knowledge is required, as everything is configured through a user-friendly interface.</p>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🎯 Main Objectives</h3>
+                    <div class="card">
+                        <ul class="feature-list">
+                            <li>Reduce time and effort in application creating</li>
+                            <li>Simplify testing workflows for all team members</li>
+                            <li>Increase efficiency across different environments</li>
+                            <li>Enable parallel testing to maximize productivity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">⭐ Key Features</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>🏢 Multi-Tenant Support</h4>
+                            <p>Create applications across 12 different tenants (Pathwise, Kawartha, Sunshine, Hubert, etc.)</p>
+                        </div>
+                        <div class="card">
+                            <h4>🌐 Environment Selection</h4>
+                            <p>Switch between Dev, QA, Test, Staging, and Production</p>
+                        </div>
+                        <div class="card">
+                            <h4>⚡ Parallel Execution</h4>
+                            <p>Run multiple tests simultaneously to save time</p>
+                        </div>
+                        <div class="card">
+                            <h4>🔧 Dynamic Configuration</h4>
+                            <p>Tenant-specific options automatically adjust based on selection</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="getting-started" class="section">
+                <div class="section-header">
+                    <div class="section-icon">🚀</div>
+                    <h2 class="section-title">Getting Started</h2>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">💻 System Requirements</h3>
+                    <div class="card">
+                        <ul class="feature-list">
+                            <li><strong>Operating System:</strong> Windows 10 or later</li>
+                            <li><strong>Network:</strong> Thirdstream VPN (required for QA and Dev environments)</li>
+                            <li><strong>Memory:</strong> At least 4GB RAM (8GB recommended for parallel execution)</li>
+                            <li><strong>Internet:</strong> Stable connection for downloading scripts and accessing environments</li>
+                        </ul>
+                        <div class="warning-box">
+                            <strong>Note:</strong> Mac version will be published soon!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">⚡ Installation (Less than 5 minutes)</h3>
+                    <div class="card">
+                        <div class="success-box">
+                            <strong>No installation required!</strong> The Auto App Runner is a portable application.
+                        </div>
+                        
+                        <ol class="step-list">
+                            <li>
+                                <div>
+                                    <strong>Install Node.js:</strong><br>
+                                    • Go to <a href="https://nodejs.org/en" target="_blank">https://nodejs.org/en</a><br>
+                                    • Click on "Download Node.js (LTS)"<br>
+                                    • Install Node.js (follow the setup wizard with default settings)
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <strong>Download Auto App Runner:</strong><br>
+                                    • Download the AutoAppRunner zip file<br>
+                                    • Extract the zip file to your desired location
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <strong>Launch the Application:</strong><br>
+                                    • Double-click Auto App Runner.exe<br>
+                                    • Start using immediately!
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🛡️ Antivirus Scan Report</h3>
+                    <div class="card">
+                        <p>To ensure the safety of the Auto App Runner executable, the file was scanned using VirusTotal, a trusted multi-antivirus scanning platform.</p>
+                        
+                        <div class="success-box">
+                            <h4>Scan Result Summary</h4>
+                            <table class="table">
+                                <tr>
+                                    <td><strong>File SHA-256:</strong></td>
+                                    <td><code>1bd922425c54d6ec345b00b18e3a33222f7f4035c53446f523acd6e11f82b9a8</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Detection Ratio:</strong></td>
+                                    <td><span class="badge badge-success">0 / 71 engines flagged the file</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Scan Date:</strong></td>
+                                    <td>June 4, 2025</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Verdict:</strong></td>
+                                    <td><span class="badge badge-success">Safe to use</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🎨 Application Layout</h3>
+                    <div class="card">
+                        <p>The application is divided into four main sections:</p>
+                        <ol class="step-list">
+                            <li><strong>Header:</strong> Contains theme toggle and status indicator</li>
+                            <li><strong>Configuration Panel:</strong> Where you set up test parameters</li>
+                            <li><strong>Execution Control:</strong> Buttons to run, pause, stop tests</li>
+                            <li><strong>Output Panel:</strong> Displays test results and logs</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="configuration" class="section">
+                <div class="section-header">
+                    <div class="section-icon">⚙️</div>
+                    <h2 class="section-title">Configuration Panel</h2>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🏢 Tenant Selection</h3>
+                    <div class="card">
+                        <p>Choose from 12 available tenants:</p>
+                        <div class="card-grid">
+                            <div class="highlight-box">
+                                <ul class="feature-list">
+                                    <li>Pathwise RLO</li>
+                                    <li>Kawartha RDO</li>
+                                    <li>Sunshine RDO</li>
+                                    <li>Hubert RDO</li>
+                                    <li>Assiniboine</li>
+                                    <li>Coastal RLO</li>
+                                </ul>
+                            </div>
+                            <div class="highlight-box">
+                                <ul class="feature-list">
+                                    <li>WealthOne RDO</li>
+                                    <li>Vancity</li>
+                                    <li>Keystone RDO</li>
+                                    <li>Keystone RDI</li>
+                                    <li>Parama RDI</li>
+                                    <li>Rocky RDO</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🌐 Environment Selection</h3>
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Environment</th>
+                                    <th>Purpose</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Dev</strong></td>
+                                    <td>Development environment for initial testing</td>
+                                    <td><span class="badge badge-primary">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>QA</strong></td>
+                                    <td>Quality Assurance environment for validation</td>
+                                    <td><span class="badge badge-primary">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Test</strong></td>
+                                    <td>Testing environment for integration tests</td>
+                                    <td><span class="badge badge-primary">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Staging</strong></td>
+                                    <td>Pre-production environment</td>
+                                    <td><span class="badge badge-primary">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prod</strong></td>
+                                    <td>Production environment</td>
+                                    <td><span class="badge badge-warning">Use with caution</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">👤 User Configuration</h3>
+                    <div class="card">
+                        <div class="card-grid">
+                            <div>
+                                <h4>Main User</h4>
+                                <p>Select from available test users</p>
+                                <div class="highlight-box">
+                                    <strong>Need additional users?</strong> Contact Alex Saberi with your user data
+                                </div>
+                            </div>
+                            <div>
+                                <h4>Contact Information</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Main User Email:</strong> Required field - enter a valid email address</li>
+                                    <li><strong>Main User Cell:</strong> Required field - enter a 10-digit phone number</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔧 Execution Settings</h3>
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Setting</th>
+                                    <th>Options</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Execution Mode</strong></td>
+                                    <td>
+                                        <span class="badge badge-primary">Normal (With UI)</span><br>
+                                        <span class="badge badge-success">Headless (Faster)</span><br>
+                                        <span class="badge badge-warning">Debug (Step-by-step)</span>
+                                    </td>
+                                    <td>
+                                        • Normal: Shows browser during execution<br>
+                                        • Headless: Runs in background (faster)<br>
+                                        • Debug: Step-by-step for troubleshooting
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Submit Application</strong></td>
+                                    <td>
+                                        <span class="badge badge-success">Yes</span><br>
+                                        <span class="badge badge-warning">No</span>
+                                    </td>
+                                    <td>
+                                        • Yes: Test will submit the application<br>
+                                        • No: Test stops before final submission
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔄 Dynamic Sections</h3>
+                    <div class="card">
+                        <p>The following sections appear automatically based on your tenant selection:</p>
+                        
+                        <div class="card-grid">
+                            <div class="highlight-box">
+                                <h4>Joint Applicant Options</h4>
+                                <p><strong>Available for:</strong> Assiniboine, WealthOne, Keystone RDO, Rocky, Kawartha, Sunshine</p>
+                                <ul class="feature-list">
+                                    <li>Add Joint Applicant: Choose Yes/No</li>
+                                    <li>Joint User: Select from available users</li>
+                                    <li>Joint User Email: Enter email for joint applicant</li>
+                                    <li>Joint User Cell: Enter phone number for joint applicant</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="warning-box">
+                                <h4>Power of Attorney (Keystone RDI Only)</h4>
+                                <ul class="feature-list">
+                                    <li>Add Power of Attorney: Choose Yes/No</li>
+                                    <li>Power of Attorney User: Select from available users</li>
+                                    <li>Power of Attorney Email: Required if adding POA</li>
+                                    <li>Power of Attorney Cell: Required if adding POA</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <h4>Third Party Options (Keystone RDI Only)</h4>
+                                <ul class="feature-list">
+                                    <li>Yes, on behalf of a business</li>
+                                    <li>Yes, on behalf of an individual</li>
+                                    <li>No</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="success-box">
+                            <strong>Need more options?</strong> Contact Alex Saberi to add additional configuration options for your tenant.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="execution" class="section">
+                <div class="section-header">
+                    <div class="section-icon">▶️</div>
+                    <h2 class="section-title">Execution Control</h2>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🎯 Single Execution</h3>
+                    <div class="card">
+                        <div class="card-grid">
+                            <div>
+                                <h4>▶️ Run Button</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Starts a single test with current configuration</li>
+                                    <li><strong>Requirements:</strong> Valid email and cell phone must be entered</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4>⏸️ Pause Button</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Pauses the currently running test</li>
+                                    <li>Test waits at current screen</li>
+                                    <li>Button changes to "▶️ Resume"</li>
+                                    <li>Browser remains open and interactive</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4>⏹️ Stop Button</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Immediately terminates the running test</li>
+                                    <li>Force kills the test process</li>
+                                    <li>Resets all buttons to initial state</li>
+                                    <li>Browser closes automatically</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">⚡ Parallel Execution</h3>
+                    <div class="card">
+                        <p>Run multiple test configurations simultaneously for maximum efficiency.</p>
+                        
+                        <h4>Setting Up Parallel Execution</h4>
+                        <ol class="step-list">
+                            <li>Configure a test in the Configuration Panel</li>
+                            <li>Click "Add to Parallel Run"</li>
+                            <li>Repeat for additional test configurations</li>
+                            <li>Click "Parallel Run" to manage and execute batch</li>
+                        </ol>
+
+                        <div class="highlight-box">
+                            <h4>Batch Queue Management</h4>
+                            <p>Each batch item displays:</p>
+                            <ul class="feature-list">
+                                <li>Tenant and Environment (e.g., "Sunshine QA")</li>
+                                <li>Main User (e.g., "Chrit")</li>
+                                <li>Additional Details: Joint applicant, account options, power of attorney details, third party selections</li>
+                            </ul>
+                            
+                            <p><strong>Queue Actions:</strong></p>
+                            <ul class="feature-list">
+                                <li>🗑️ Remove individual items</li>
+                                <li>× Clear All - Remove all items from queue</li>
+                                <li>▶ Start Parallel Execution - Run all tests simultaneously</li>
+                            </ul>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>Execution Process</h4>
+                            <ol class="step-list">
+                                <li>Verify queue contains desired tests</li>
+                                <li>Click "Start Parallel Execution"</li>
+                                <li>Monitor real-time progress</li>
+                                <li>Use controls: Pause, Resume, Stop</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔧 Utilities</h3>
+                    <div class="card">
+                        <div class="card-grid">
+                            <div class="highlight-box">
+                                <h4>↻ Refresh Scripts</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Reloads available test scripts</li>
+                                    <li><strong>Use Case:</strong> When new scripts are added or updated</li>
+                                    <li><strong>Automatic:</strong> Scripts also update on application startup</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <h4>↗ Open Admin Panel</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Opens the admin panel for selected tenant/environment</li>
+                                    <li><strong>Behavior:</strong> Opens in default browser</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <h4>↗ Open Workflows</h4>
+                                <ul class="feature-list">
+                                    <li><strong>Function:</strong> Opens the workflows page for selected tenant/environment</li>
+                                    <li><strong>Behavior:</strong> Opens in default browser</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="output" class="section">
+                <div class="section-header">
+                    <div class="section-icon">📄</div>
+                    <h2 class="section-title">Output Panel</h2>
+                </div>
+
+                <div class="card">
+                    <p>The output panel provides live information during test execution:</p>
+                    
+                    <div class="card-grid">
+                        <div class="highlight-box">
+                            <h4>📊 Real-time Information</h4>
+                            <ul class="feature-list">
+                                <li>Real-time logs: Shows test execution progress</li>
+                                <li>Results: Displays final test outcomes</li>
+                                <li>Error messages: Shows detailed error information when tests fail</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="success-box">
+                            <h4>🚥 Status Indicators</h4>
+                            <ul class="feature-list">
+                                <li><span class="badge badge-primary">Starting test execution...</span> - Test initialization</li>
+                                <li><span class="badge badge-warning">Test paused</span> - Execution paused by user</li>
+                                <li><span class="badge badge-primary">Test resumed</span> - Execution continued</li>
+                                <li><span class="badge badge-success">Test completed</span> - Successful completion</li>
+                                <li><span class="badge badge-error">Test failed</span> - Error occurred</li>
+                                <li><span class="badge badge-warning">Test stopped</span> - Manually terminated</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Output Controls</h4>
+                    <div class="button-group">
+                        <div class="btn btn-primary">⧉ Copy - Copies entire output content to clipboard</div>
+                        <div class="btn btn-secondary">⚠ Report Issue - Opens issue reporting modal</div>
+                        <div class="btn btn-secondary">× Clear - Clears all content from output panel</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting" class="section">
+                <div class="section-header">
+                    <div class="section-icon">🔧</div>
+                    <h2 class="section-title">Troubleshooting</h2>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🚨 Common Issues and Solutions</h3>
+                    <div class="card">
+                        <div class="warning-box">
+                            <h4>"No running tests to pause/stop"</h4>
+                            <p><strong>Cause:</strong> No test is currently executing</p>
+                            <p><strong>Solution:</strong> Start a test first using "Run Test" button</p>
+                        </div>
+
+                        <div class="warning-box">
+                            <h4>"Playwright Error" or execution failures</h4>
+                            <p><strong>Cause:</strong> Various reasons (network issues, environment problems, etc.)</p>
+                            <p><strong>Solutions:</strong></p>
+                            <ol class="step-list">
+                                <li>Check internet connection</li>
+                                <li>Verify environment is accessible</li>
+                                <li>Try different execution mode (Normal vs Headless)</li>
+                                <li>Contact Alex Saberi if issues persist</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">❌ Error Messages</h3>
+                    <div class="card">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Error Message</th>
+                                    <th>Solution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>"Failed to download scripts"</code></td>
+                                    <td>
+                                        • Check internet connection<br>
+                                        • Wait and try again (temporary network issue)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>"Playwright test failed"</code></td>
+                                    <td>
+                                        • Check output panel for detailed error<br>
+                                        • Verify configuration parameters<br>
+                                        • Try different execution mode<br>
+                                        • Contact development team if persistent
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" class="section">
+                <div class="section-header">
+                    <div class="section-icon">❓</div>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">💬 General Usage</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Do I need to install anything to use Auto App Runner?
+                        </div>
+                        <div class="faq-answer">
+                            You only need to install Node.js. Auto App Runner is a portable application - just download and double-click to run.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I run tests on multiple environments simultaneously?
+                        </div>
+                        <div class="faq-answer">
+                            Yes, using parallel execution you can run tests on different environments at the same time.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How often are the test scripts updated?
+                        </div>
+                        <div class="faq-answer">
+                            Scripts update automatically every time you start the application, and you can manually refresh them anytime.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I use this on Mac or Linux?
+                        </div>
+                        <div class="faq-answer">
+                            Currently, Auto App Runner is designed for Windows. Mac and Linux support may be added in future versions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">⚙️ Configuration</h3>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Why don't I see all the configuration options?
+                        </div>
+                        <div class="faq-answer">
+                            The app only shows options relevant to your selected tenant. Different tenants have different available features.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What's the difference between execution modes?
+                        </div>
+                        <div class="faq-answer">
+                            <strong>Normal:</strong> Shows browser window (best for watching/debugging)<br>
+                            <strong>Headless:</strong> Faster, runs in background (best for speed)<br>
+                            <strong>Debug:</strong> Step-by-step execution (best for troubleshooting)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">⚡ Parallel Execution</h3>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            How many tests can I run simultaneously?
+                        </div>
+                        <div class="faq-answer">
+                            This depends on your system specifications. Start with 2-3 tests and increase based on performance.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I add more tests to a batch while it's running?
+                        </div>
+                        <div class="faq-answer">
+                            No, you cannot modify a batch once execution has started. You'll need to wait for completion or stop the batch.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What happens if one test fails in a parallel batch?
+                        </div>
+                        <div class="faq-answer">
+                            Other tests continue running. Failed tests are marked in the results, but don't affect other tests in the batch.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔧 Technical Issues</h3>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            What should I do if a test gets stuck?
+                        </div>
+                        <div class="faq-answer">
+                            Use the Stop button to terminate the test, then try running it again. If the issue persists, contact Alex Saberi.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            The application is running slowly. What can I do?
+                        </div>
+                        <div class="faq-answer">
+                            Try using Headless mode, close other applications, and ensure your system meets the recommended specifications (8GB+ RAM).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🆘 Support</h3>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Who can I contact if I have issues?
+                        </div>
+                        <div class="faq-answer">
+                            Use the "Report Issue" button in the application, or contact Alex Saberi through Teams for technical support.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Can I suggest new features?
+                        </div>
+                        <div class="faq-answer">
+                            Absolutely! Feature suggestions are welcome. Contact Alex Saberi through Teams.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <span>Designed and Developed with</span>
+                <span class="footer-heart">♥</span>
+                <span>for Thirdstream by Alex Saberi</span>
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary);">
+                Version 1.0 • Last Updated: June 4, 2025
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Highlight current section in navigation
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function highlightNavigation() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.style.color = '';
+                    link.style.background = '';
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.style.color = 'var(--primary-color)';
+                        link.style.background = 'rgba(37, 99, 235, 0.1)';
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNavigation);
+        });
+    </script>
+</body>
+</html>
