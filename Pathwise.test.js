@@ -708,6 +708,7 @@ test('Pathwise_RLO', async ({ page }) => {
 
         await new Promise(() => { });
     } else {
+         await browser.close(); //
         await new Promise(() => { });
     }
 
