@@ -506,6 +506,9 @@ const mainUserCell = '6478543392';
 
 // Submit Application?
 const selectSubmissionStatus = Data.submissionStatus[0]; // 0 = Yes, 1 = No
+// Pause Mode?
+const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
+
 
 
 // ===========================
@@ -699,17 +702,21 @@ test('Pathwise_RLO', async ({ page }) => {
 
     // Confirmation Page
     await page.locator('p-checkbox div').nth(2).click();
-    
-      // ---------- confirmation page
+
+    // ---------- confirmation page
 
 
     if (selectSubmissionStatus === 'Yes') {
         await page.getByRole('button', { name: 'Submit' }).click();
 
-        await new Promise(() => { });
+        if (selectPauseMode === 'Active') {
+            await new Promise(() => { });
+        }
+
     } else {
-         await browser.close(); //
-        await new Promise(() => { });
+        if (selectPauseMode === 'Active') {
+            await new Promise(() => { });
+        }
     }
 
 
