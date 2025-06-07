@@ -571,7 +571,7 @@ test('Rocky_RDO', async ({ page }) => {
 
       if (selectSubmissionStatus === 'Yes') {
         await page.getByRole('button', { name: 'Submit' }).click();
-        await expect(page.getByRole('heading', { name: 'Getting things ready...' })).toBeVisible({ timeout: 30000 });
+        await expect(page.getByRole('heading', { name: 'Processing application...' })).toBeVisible({ timeout: 30000 });
         await page.waitForTimeout(3000);
 
         if (selectPauseMode === 'Active') {
