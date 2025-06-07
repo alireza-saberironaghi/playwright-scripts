@@ -245,7 +245,8 @@ const jointUserCell = '6478543394';
 const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0 = Yes, 1 = No
 // Submit Application?
 const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
-
+// Pause Mode?
+const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
 
 
 // ===========================
@@ -568,13 +569,17 @@ test('Rocky_RDO', async ({ page }) => {
     // ---------- confirmation page
 
 
-    if (selectSubmissionStatus === 'Yes') {
+      if (selectSubmissionStatus === 'Yes') {
         await page.getByRole('button', { name: 'Submit' }).click();
 
-        await new Promise(() => { });
+        if (selectPauseMode === 'Active') {
+            await new Promise(() => { });
+        }
+
     } else {
-       
-        
+        if (selectPauseMode === 'Active') {
+            await new Promise(() => { });
+        }
     }
 
 
