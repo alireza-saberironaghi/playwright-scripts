@@ -202,6 +202,7 @@ const Data = {
         intendedUses: ['Daily', 'GST', 'Daily Banking', 'Education', 'Equipment', 'Home Mortgage', 'Investment', 'Other', 'Renovations', 'Retirement', 'Taxes', 'Travel/Vacation'],
         openAnotherAccount: ['Yes', 'No'],
         submissionStatus: ['Yes', 'No'],
+        pauseMode: ['Yes', 'No'],
         addJointApplicant: ['Yes', 'No'],
     }
 };
@@ -246,7 +247,7 @@ const selectOpenAnotherAccount = Data.accountOptions.openAnotherAccount[0]; // 0
 // Submit Application?
 const selectSubmissionStatus = Data.accountOptions.submissionStatus[0]; // 0 = Yes, 1 = No
 // Pause Mode?
-const selectPauseMode = 'Deactive'; // 'Active' or 'Deactive'
+const selectPauseMode = Data.accountOptions.pauseMode[0]; // 0 = Yes, 1 = No
 
 
 // ===========================
@@ -574,12 +575,12 @@ test('Rocky_RDO', async ({ page }) => {
         await expect(page.getByRole('heading', { name: 'Processing application...' })).toBeVisible({ timeout: 30000 });
         await page.waitForTimeout(3000);
 
-        if (selectPauseMode === 'Active') {
+        if (selectPauseMode === 'Yes') {
             await new Promise(() => { });
         }
 
     } else {
-        if (selectPauseMode === 'Active') {
+        if (selectPauseMode === 'Yes') {
             await new Promise(() => { });
         }
     }
